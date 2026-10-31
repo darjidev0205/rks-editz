@@ -31,3 +31,4 @@ export const PROCESS_PHASES: ProcessPhase[] = [
     details: ['ProRes 4444 & H.265 master files', 'Vertical 9:16 and social aspect crops', 'Archival project file consolidation'],
   },
 ];
+

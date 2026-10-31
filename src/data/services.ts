@@ -41,3 +41,4 @@ export const SERVICES: ServiceItem[] = [
     deliverables: ['9:16 Vertical Reels', 'Campaign Cutdowns', 'Organic Social Hooks', 'Ad Creatives & Variations'],
   },
 ];
+

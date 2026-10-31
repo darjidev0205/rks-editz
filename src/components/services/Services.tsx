@@ -22,16 +22,16 @@ export const Services: React.FC = () => {
       if (headingRef.current) {
         gsap.fromTo(
           headingRef.current.children,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.7,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headingRef.current,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none reverse',
             },
           }
@@ -45,7 +45,7 @@ export const Services: React.FC = () => {
           { scaleX: 0, transformOrigin: 'left center' },
           {
             scaleX: 1,
-            duration: 1.0,
+            duration: 0.9,
             ease: 'power3.inOut',
             scrollTrigger: {
               trigger: dividerRef.current,
@@ -61,12 +61,12 @@ export const Services: React.FC = () => {
         const rows = rowsRef.current.children;
         gsap.fromTo(
           rows,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.75,
-            stagger: 0.12,
+            duration: 0.65,
+            stagger: 0.1,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: rowsRef.current,
@@ -85,17 +85,17 @@ export const Services: React.FC = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="relative pt-20 md:pt-32 pb-20 md:pb-28 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-[1600px] mx-auto border-t border-white/8 bg-[#1A1C1E]/30"
+      className="relative pt-16 md:pt-24 pb-20 md:pb-28 px-4 sm:px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/10"
     >
       {/* Section Header */}
-      <div ref={headingRef} className="mb-12 md:mb-16 max-w-2xl">
-        <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#C4C7C9] font-medium block mb-2">
+      <div ref={headingRef} className="mb-10 md:mb-12 max-w-2xl">
+        <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium block mb-2">
           CAPABILITIES
         </span>
-        <h2 className="font-geist text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#E2E2E5]">
+        <h2 className="font-geist text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#F4F3EF]">
           What I Do.
         </h2>
-        <p className="font-inter text-sm sm:text-base text-[#A3AAA9] mt-2">
+        <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5">
           From raw ideas to the final frame.
         </p>
       </div>
@@ -111,34 +111,34 @@ export const Services: React.FC = () => {
             <div
               key={service.id}
               onClick={() => setActiveService(isExpanded ? null : service.id)}
-              className="py-6 sm:py-8 group cursor-pointer transition-colors duration-300 hover:bg-white/[0.02] px-2 sm:px-4 rounded-lg"
+              className="py-5 sm:py-7 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02] px-2 sm:px-3 rounded-lg"
             >
               <div className="flex items-start justify-between gap-4">
-                <div className="flex-grow max-w-4xl pr-4">
-                  <span className="font-geist text-xs text-[#8D928C] block mb-2 font-medium">
+                <div className="flex-grow max-w-3xl pr-4">
+                  <span className="font-geist text-xs text-[#A5A7AA]/70 block mb-1.5 font-medium">
                     {service.number}
                   </span>
-                  <h3 className="font-geist text-xl sm:text-2xl md:text-3xl font-medium text-[#E2E2E5] group-hover:text-[#C4D6C6] transition-colors">
+                  <h3 className="font-geist text-lg sm:text-xl md:text-2xl font-medium text-[#F4F3EF] group-hover:text-white transition-colors">
                     {service.title}
                   </h3>
-                  <p className="font-inter text-sm sm:text-base text-[#A3AAA9] mt-2 leading-relaxed">
+                  <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5 leading-relaxed">
                     {service.tagline}
                   </p>
 
                   {/* Expandable Details on Desktop/Mobile */}
                   <div
-                    className={`mt-4 pt-4 border-t border-white/5 transition-all duration-300 overflow-hidden ${
+                    className={`mt-3.5 pt-3.5 border-t border-white/5 transition-all duration-300 overflow-hidden ${
                       isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <p className="font-inter text-xs sm:text-sm text-[#C3C8C1] leading-relaxed mb-4">
+                    <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] leading-relaxed mb-3">
                       {service.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {service.deliverables.map((item) => (
                         <span
                           key={item}
-                          className="px-2.5 py-1 rounded bg-[#25292B] border border-white/5 text-xs font-geist text-[#E2E2E5]"
+                          className="px-2.5 py-1 rounded bg-[#202226] border border-white/10 text-xs font-geist text-[#F4F3EF]"
                         >
                           {item}
                         </span>
@@ -147,10 +147,10 @@ export const Services: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-2 text-[#8D928C] group-hover:text-[#C4D6C6] transition-colors flex-shrink-0">
+                <div className="pt-1.5 text-[#A5A7AA] group-hover:text-white transition-colors flex-shrink-0">
                   <ArrowForward
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      isExpanded ? 'rotate-90 text-[#C4D6C6]' : 'group-hover:translate-x-1'
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isExpanded ? 'rotate-90 text-white' : 'group-hover:translate-x-1'
                     }`}
                   />
                 </div>

@@ -20,11 +20,11 @@ export const About: React.FC = () => {
       if (plateRef.current) {
         gsap.fromTo(
           plateRef.current,
-          { opacity: 0.85, y: 30 },
+          { opacity: 0.9, y: 25 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.9,
+            duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -39,11 +39,11 @@ export const About: React.FC = () => {
       if (portraitRef.current) {
         gsap.fromTo(
           portraitRef.current,
-          { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.05 },
+          { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.04 },
           {
             clipPath: 'inset(0% 0% 0% 0%)',
             scale: 1,
-            duration: 1.0,
+            duration: 0.9,
             ease: 'power3.inOut',
             scrollTrigger: {
               trigger: portraitRef.current,
@@ -58,12 +58,12 @@ export const About: React.FC = () => {
       if (contentRef.current) {
         gsap.fromTo(
           contentRef.current.children,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.7,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: contentRef.current,
@@ -82,14 +82,14 @@ export const About: React.FC = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="relative w-full py-16 sm:py-24 md:py-32 bg-[#ECECE6] text-[#171A19] transition-colors duration-700"
+      className="relative w-full py-16 sm:py-24 bg-[#ECECE6] text-[#171A19] transition-colors duration-500"
     >
       <div
         ref={plateRef}
-        className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16"
+        className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8"
       >
         {/* Monograph Header Bar */}
-        <div className="flex items-center justify-between pb-4 border-b border-black/10 mb-8 sm:mb-12">
+        <div className="flex items-center justify-between pb-3.5 border-b border-black/10 mb-8 sm:mb-10">
           <span className="font-geist text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-black/60">
             DIRECTOR'S STATEMENT
           </span>
@@ -99,12 +99,12 @@ export const About: React.FC = () => {
         </div>
 
         {/* 2-Column Editorial Monograph Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
           {/* Left Column: Authentic B&W Portrait */}
           <div className="lg:col-span-5">
             <div
               ref={portraitRef}
-              className="aspect-[4/5] w-full rounded-xl overflow-hidden bg-neutral-300 shadow-xl relative"
+              className="aspect-[4/5] w-full rounded-card overflow-hidden bg-neutral-300 shadow-xl relative"
             >
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuByuFePPDAYNXrvuAxFNFReLWWJ96A3p_ykM3PfkPOjW-YsHywRSU9wQxN6jyzb9yufW1lPxXZuKExKAhMTR9S9gyIFspzfn_fm-ZuiZCCYdhYKIr8YupT8xgZAr-b4Wk3W-bEGNwWjSWVAUtUU_wTkGW103w2sV_-7A7Dz5y3XFKkZ08I4nO6B_mdZWtiKMmxiFf0NtQe3wvpptZqqe0Bs3m0xveFl7TDT2cx1FPc"
@@ -113,7 +113,7 @@ export const About: React.FC = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3 py-1.5 rounded-lg bg-black/80 backdrop-blur-md text-[#ECECE6] text-[10px] sm:text-xs font-geist tracking-wider">
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-2.5 py-1 rounded-md bg-black/85 backdrop-blur-md text-[#ECECE6] text-[10px] sm:text-xs font-geist tracking-wider">
                 AHMEDABAD • POST-STUDIO
               </div>
             </div>
@@ -124,28 +124,28 @@ export const About: React.FC = () => {
             <span className="font-geist text-xs uppercase tracking-widest text-black/50 mb-2 font-medium">
               THE VISION
             </span>
-            <h2 className="font-geist text-3xl sm:text-4xl md:text-5xl font-semibold text-[#171A19] tracking-tight mb-6">
+            <h2 className="font-geist text-2xl sm:text-3xl md:text-4xl font-semibold text-[#171A19] tracking-tight mb-4">
               Behind the Edit.
             </h2>
-            <p className="font-inter text-base sm:text-lg text-black/80 leading-relaxed mb-6 font-normal">
+            <p className="font-inter text-sm sm:text-base text-black/80 leading-relaxed mb-4 font-normal">
               I'm Krish, a video editor and creative producer who loves turning ideas into visuals
               people want to watch. I work across storytelling, motion, filming and editing, combining
               creative judgment with modern production workflows.
             </p>
-            <p className="font-inter text-sm sm:text-base text-black/70 leading-relaxed mb-8">
+            <p className="font-inter text-xs sm:text-sm text-black/70 leading-relaxed mb-6">
               Whether crafting high-intensity commercial spots or long-form documentary narratives,
               my focus remains absolute: frame-accurate rhythm, intentional color grade, and sound
               design that anchors the spectator inside the narrative universe.
             </p>
 
-            {/* Clean Metadata Badges */}
-            <div className="pt-6 border-t border-black/10 flex flex-wrap gap-4 sm:gap-6 font-geist text-xs text-black/70">
+            {/* Clean Monochromatic Metadata Badges */}
+            <div className="pt-5 border-t border-black/10 flex flex-wrap gap-4 font-geist text-xs text-black/80">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-black/80 animate-pulse"></span>
                 <span className="font-medium">Ahmedabad, India</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-black/70" />
                 <span className="font-medium">Available for Select Commissions</span>
               </div>
             </div>

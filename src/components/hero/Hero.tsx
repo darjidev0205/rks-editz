@@ -4,11 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, Play } from 'lucide-react';
 import { useSmoothScroll } from '../ui/SmoothScrollProvider';
 
-interface HeroProps {
-  onOpenProject?: (id: string) => void;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
+export const Hero: React.FC = () => {
   const { scrollTo } = useSmoothScroll();
   const heroRef = useRef<HTMLElement>(null);
   const headlineLine1Ref = useRef<HTMLSpanElement>(null);
@@ -116,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
         // Desktop parallax
         '(min-width: 768px)': () => {
           gsap.to(mediaContainerRef.current, {
-            yPercent: 12,
+            yPercent: 10,
             ease: 'none',
             scrollTrigger: {
               trigger: heroRef.current,
@@ -128,8 +126,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
 
           // Text parallax slightly faster
           gsap.to([eyebrowRef.current, headlineLine1Ref.current?.parentElement?.parentElement, subheadRef.current, ctasRef.current], {
-            y: -40,
-            opacity: 0.4,
+            y: -35,
+            opacity: 0.35,
             ease: 'none',
             scrollTrigger: {
               trigger: heroRef.current,
@@ -142,7 +140,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
         // Mobile subtle parallax
         '(max-width: 767px)': () => {
           gsap.to(primaryCardRef.current, {
-            yPercent: 6,
+            yPercent: 5,
             ease: 'none',
             scrollTrigger: {
               trigger: heroRef.current,
@@ -176,33 +174,33 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
     <section
       ref={heroRef}
       id="hero"
-      className="relative min-h-[92vh] md:min-h-screen pt-28 md:pt-36 pb-16 md:pb-28 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-[1600px] mx-auto flex flex-col justify-center overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-screen pt-24 md:pt-32 pb-14 md:pb-24 px-4 sm:px-6 md:px-8 max-w-[1280px] mx-auto flex flex-col justify-center overflow-hidden"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Column: Typographic Narrative */}
         <div className="lg:col-span-7 flex flex-col justify-center z-10">
           {/* Eyebrow */}
-          <div ref={eyebrowRef} className="inline-flex items-center gap-2.5 mb-5 md:mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#C4D6C6] animate-pulse"></span>
-            <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#C4C7C9] font-medium">
+          <div ref={eyebrowRef} className="inline-flex items-center gap-2.5 mb-4 md:mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F4F3EF] animate-pulse"></span>
+            <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium">
               INDEPENDENT CREATIVE / AHMEDABAD
             </span>
           </div>
 
           {/* Headline with Mask Containers */}
-          <h1 className="font-geist font-semibold tracking-tight text-[#E2E2E5] uppercase text-[40px] leading-[44px] sm:text-5xl sm:leading-[52px] md:text-6xl md:leading-[64px] lg:text-[76px] lg:leading-[80px] xl:text-[88px] xl:leading-[90px] mb-6">
-            <span className="block overflow-hidden py-1">
+          <h1 className="font-geist font-semibold tracking-tight text-[#F4F3EF] uppercase text-[38px] leading-[42px] sm:text-5xl sm:leading-[52px] md:text-6xl md:leading-[64px] lg:text-[72px] lg:leading-[76px] mb-5">
+            <span className="block overflow-hidden py-0.5">
               <span ref={headlineLine1Ref} className="block transform-gpu">
                 Stories,
               </span>
             </span>
-            <span className="block overflow-hidden py-1">
+            <span className="block overflow-hidden py-0.5">
               <span ref={headlineLine2Ref} className="block transform-gpu">
                 Shaped to
               </span>
             </span>
-            <span className="block overflow-hidden py-1">
-              <span ref={headlineLine3Ref} className="block transform-gpu text-[#C4D6C6]">
+            <span className="block overflow-hidden py-0.5">
+              <span ref={headlineLine3Ref} className="block transform-gpu text-[#F4F3EF]">
                 Stay.
               </span>
             </span>
@@ -211,7 +209,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
           {/* Subhead */}
           <p
             ref={subheadRef}
-            className="font-inter text-[#C3C8C1] text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mb-4 font-normal"
+            className="font-inter text-[#A5A7AA] text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-3 font-normal"
           >
             Video editing, motion and visual storytelling for creators and visionary brands.
           </p>
@@ -219,59 +217,59 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
           {/* Technical Signature */}
           <div
             ref={signatureRef}
-            className="font-geist text-xs tracking-wider uppercase text-[#8D928C] mb-8 font-medium"
+            className="font-geist text-xs tracking-wider uppercase text-[#A5A7AA]/70 mb-7 font-medium"
           >
             KRISH PATEL — THE CREATIVE BEHIND RKA EDITZ
           </div>
 
           {/* CTAs */}
-          <div ref={ctasRef} className="flex flex-wrap items-center gap-4">
+          <div ref={ctasRef} className="flex flex-wrap items-center gap-3.5">
             <button
               onClick={handleExploreClick}
-              className="px-7 py-3.5 rounded-full bg-[#C4D6C6] hover:bg-[#DCE8DD] text-[#101F15] font-geist font-medium text-sm tracking-wide transition-all duration-300 flex items-center gap-2 group shadow-lg active:scale-95"
+              className="px-6 py-3 rounded-full bg-[#E8E7E3] hover:bg-[#D4D3CF] text-[#111214] font-geist font-medium text-xs sm:text-sm tracking-wide transition-all duration-200 flex items-center gap-2 group shadow-lg active:scale-95"
             >
               <span>Explore Work</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
             <button
               onClick={handleConnectClick}
-              className="px-6 py-3.5 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5 text-[#C4C7C9] hover:text-[#E2E2E5] font-geist text-sm tracking-wide transition-all duration-300 active:scale-95"
+              className="px-5 py-3 rounded-full border border-white/12 hover:border-white/25 hover:bg-white/5 text-[#F4F3EF] font-geist text-xs sm:text-sm tracking-wide transition-all duration-200 active:scale-95"
             >
               Let's Connect
             </button>
           </div>
         </div>
 
-        {/* Right Column: Cinematic Media Staggered Cards */}
+        {/* Right Column: Hero Media Preview */}
         <div ref={mediaContainerRef} className="lg:col-span-5 relative w-full mt-4 lg:mt-0">
-          <div className="relative w-full max-w-[420px] lg:max-w-none mx-auto">
+          <div className="relative w-full max-w-[380px] lg:max-w-none mx-auto">
             {/* Primary Portrait Card (NOIR LUXE) */}
             <div
               ref={primaryCardRef}
-              onClick={() => onOpenProject?.('noir-luxe')}
-              className="w-[85%] sm:w-[82%] rounded-xl overflow-hidden border border-white/10 bg-[#1E2022] shadow-2xl relative cursor-pointer group"
+              onClick={handleExploreClick}
+              className="w-[84%] rounded-card overflow-hidden border border-white/10 bg-[#202226] shadow-2xl relative cursor-pointer group"
             >
-              <div className="aspect-[9/13] sm:aspect-[9/14] w-full relative overflow-hidden">
+              <div className="aspect-[9/13] w-full relative overflow-hidden">
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6oRbG6Rl3fL7gv02vLkjiAPbzuAKkeB9rvgkbfsuA_1TzrWYcg0x6SFryc3ug_7m5ofnGsXRgChrll2pH6euz6mFA67kiO04s6IdJDcxjmwYDpwNUmMfO9mr65cHPEg-Fm5bqjaHaFcsy2ISQCyWJJbYsSuErYbIgKMeSrN8ZDIAOCGn92Lz2Kk7kvqw9r1geDOL-VGVfJuoZYlJJKgJR5hVB7VdVcNNZt6wylDs"
                   alt="Noir Luxe commercial film still with editorial fashion framing"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500 ease-out"
                   loading="eager"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E10] via-transparent to-black/30"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0E10] via-transparent to-black/30"></div>
 
                 {/* Card Badge Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex justify-between items-end">
                   <div>
-                    <span className="font-geist text-[10px] uppercase tracking-wider text-[#C4D6C6] block font-semibold">
+                    <span className="font-geist text-[10px] uppercase tracking-wider text-[#A5A7AA] block font-medium">
                       01 / COMMERCIAL
                     </span>
-                    <span className="font-geist text-sm font-semibold text-[#E2E2E5] tracking-tight">
+                    <span className="font-geist text-xs sm:text-sm font-semibold text-[#F4F3EF] tracking-tight">
                       NOIR LUXE
                     </span>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-[#0C0E10]/80 backdrop-blur-md flex items-center justify-center border border-white/15 group-hover:scale-110 group-hover:bg-[#C4D6C6] group-hover:text-black transition-all">
-                    <Play className="w-3.5 h-3.5 text-[#C4D6C6] group-hover:text-black fill-current ml-0.5" />
+                  <div className="w-8 h-8 rounded-full bg-[#202226]/85 backdrop-blur-md flex items-center justify-center border border-white/12 group-hover:scale-105 group-hover:bg-[#E8E7E3] group-hover:text-[#111214] transition-all">
+                    <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
                   </div>
                 </div>
               </div>
@@ -280,21 +278,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenProject }) => {
             {/* Staggered Secondary Landscape Preview (35MM REEL) */}
             <div
               ref={secondaryCardRef}
-              onClick={() => onOpenProject?.('the-artisans-touch')}
-              className="w-[68%] sm:w-[65%] absolute -bottom-6 -right-2 sm:-right-4 rounded-xl overflow-hidden border border-white/12 bg-[#282A2C] shadow-2xl z-20 cursor-pointer group"
+              onClick={handleExploreClick}
+              className="w-[66%] absolute -bottom-5 -right-1 sm:-right-3 rounded-card overflow-hidden border border-white/12 bg-[#292C30] shadow-2xl z-20 cursor-pointer group"
             >
               <div className="aspect-video w-full relative overflow-hidden">
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL7hs5BjUXjdMSI2igwgLmUoEk9veFXsFLCfkh3IGYtOenOuY23MHjOtCDCXfLMJI4ctTNDxqJ8tVndTGPazxR65oa_F7Wwb6y_Ka9SdixuI7qI6efCmUJYL5vZwNfcm4abKZ6HIRzY6Qs36Ebx_Onm5GHCylUA6d_jQZcX24vak72PmMlrPZJ6d78IFTYgynKrIuzxg85LRJfMLKeJZSaw29bz6rax771ARPkcQ4"
                   alt="Luthier craftsman violin workshop documentary still"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500 ease-out"
                   loading="eager"
                 />
                 <div className="absolute inset-0 bg-black/25"></div>
-                <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-[#0C0E10]/80 backdrop-blur-md text-[9px] font-geist text-[#C3C8C1] border border-white/10">
+                <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-[#17191C]/85 backdrop-blur-md text-[9px] font-geist text-[#A5A7AA] border border-white/10">
                   35MM REEL
                 </div>
-                <div className="absolute bottom-2.5 left-2.5">
+                <div className="absolute bottom-2 left-2">
                   <span className="font-geist text-xs font-medium text-white block drop-shadow-md">
                     The Artisan's Touch
                   </span>

@@ -20,23 +20,23 @@ export const CreativeProcess: React.FC = () => {
       if (headingRef.current) {
         gsap.fromTo(
           headingRef.current.children,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.7,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headingRef.current,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none reverse',
             },
           }
         );
       }
 
-      // 2. Timeline line extending scrub as user scrolls through the section
+      // 2. Timeline line extending scrub
       if (timelineLineRef.current && phasesContainerRef.current) {
         gsap.fromTo(
           timelineLineRef.current,
@@ -48,7 +48,7 @@ export const CreativeProcess: React.FC = () => {
               trigger: phasesContainerRef.current,
               start: 'top 75%',
               end: 'bottom 85%',
-              scrub: 0.6,
+              scrub: 0.5,
             },
           }
         );
@@ -60,11 +60,11 @@ export const CreativeProcess: React.FC = () => {
         Array.from(phases).forEach((phase) => {
           gsap.fromTo(
             phase,
-            { opacity: 0, x: -20 },
+            { opacity: 0, x: -15 },
             {
               opacity: 1,
               x: 0,
-              duration: 0.7,
+              duration: 0.6,
               ease: 'power3.out',
               scrollTrigger: {
                 trigger: phase,
@@ -84,71 +84,71 @@ export const CreativeProcess: React.FC = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="relative pt-20 md:pt-32 pb-20 md:pb-28 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-[1600px] mx-auto border-t border-white/8 bg-[#101214]"
+      className="relative pt-16 md:pt-24 pb-20 md:pb-28 px-4 sm:px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/10 bg-[#0D0E10]"
     >
       {/* Section Header */}
-      <div ref={headingRef} className="mb-12 md:mb-16 max-w-2xl">
-        <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#C4C7C9] font-medium block mb-2">
+      <div ref={headingRef} className="mb-10 md:mb-12 max-w-2xl">
+        <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium block mb-2">
           METHODOLOGY
         </span>
-        <h2 className="font-geist text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#E2E2E5]">
+        <h2 className="font-geist text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#F4F3EF]">
           How Ideas Become Visuals.
         </h2>
-        <p className="font-inter text-sm sm:text-base text-[#A3AAA9] mt-2">
+        <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5">
           A disciplined four-phase pipeline built for clarity, speed and editorial excellence.
         </p>
       </div>
 
       {/* Vertical Interactive Timeline */}
-      <div className="relative pl-7 sm:pl-10 md:pl-12 max-w-4xl">
+      <div className="relative pl-6 sm:pl-9 max-w-3xl">
         {/* Background Inactive Rail */}
-        <div className="absolute left-2.5 sm:left-3 top-3 bottom-6 w-[2px] bg-white/10" />
+        <div className="absolute left-2.5 sm:left-3 top-2.5 bottom-6 w-[1.5px] bg-white/10" />
 
         {/* Scrub-extended Active Timeline Rail */}
         <div
           ref={timelineLineRef}
-          className="absolute left-2.5 sm:left-3 top-3 bottom-6 w-[2px] bg-gradient-to-b from-[#C4D6C6] via-[#C4D6C6] to-[#E0F2E2] shadow-sm shadow-[#C4D6C6]/50 origin-top"
+          className="absolute left-2.5 sm:left-3 top-2.5 bottom-6 w-[1.5px] bg-[#E8E7E3] origin-top"
         />
 
         {/* Phase Items */}
-        <div ref={phasesContainerRef} className="space-y-10 sm:space-y-12">
+        <div ref={phasesContainerRef} className="space-y-8 sm:space-y-10">
           {PROCESS_PHASES.map((p, idx) => (
             <div key={p.phase} className="relative group">
               {/* Timeline Node Dot */}
               <div
-                className={`absolute -left-[1.85rem] sm:-left-[2.1rem] md:-left-[2.35rem] top-1.5 w-4 h-4 rounded-full bg-[#101214] border-2 transition-all duration-300 ${
+                className={`absolute -left-[1.8rem] sm:-left-[2.1rem] top-1.5 w-3.5 h-3.5 rounded-full bg-[#0D0E10] border-2 transition-all duration-300 ${
                   idx === 0 || idx === 3
-                    ? 'border-[#C4D6C6] shadow-sm shadow-[#C4D6C6]/40'
-                    : 'border-white/30 group-hover:border-[#C4D6C6]'
+                    ? 'border-[#E8E7E3]'
+                    : 'border-white/30 group-hover:border-[#E8E7E3]'
                 }`}
               >
                 <div
-                  className={`w-1.5 h-1.5 rounded-full m-auto mt-[3px] transition-colors ${
+                  className={`w-1.5 h-1.5 rounded-full m-auto mt-[2px] transition-colors ${
                     idx === 0 || idx === 3
-                      ? 'bg-[#C4D6C6]'
-                      : 'bg-transparent group-hover:bg-[#C4D6C6]'
+                      ? 'bg-[#E8E7E3]'
+                      : 'bg-transparent group-hover:bg-[#E8E7E3]'
                   }`}
                 />
               </div>
 
               {/* Phase Content */}
-              <div className="bg-[#1C2022]/60 hover:bg-[#1E2022] p-5 sm:p-6 rounded-xl border border-white/8 transition-colors duration-300">
-                <span className="font-geist text-xs text-[#C4D6C6] font-semibold tracking-wider uppercase block mb-1">
+              <div className="bg-[#202226] hover:bg-[#292C30] p-4.5 sm:p-5 rounded-card border border-white/10 transition-colors duration-200">
+                <span className="font-geist text-[11px] text-[#A5A7AA] font-semibold tracking-wider uppercase block mb-1">
                   {p.phase}
                 </span>
-                <h3 className="font-geist text-xl sm:text-2xl font-medium text-[#E2E2E5] group-hover:text-white transition-colors">
+                <h3 className="font-geist text-lg sm:text-xl font-medium text-[#F4F3EF] group-hover:text-white transition-colors">
                   {p.title}
                 </h3>
-                <p className="font-inter text-sm sm:text-base text-[#A3AAA9] mt-2 leading-relaxed">
+                <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5 leading-relaxed">
                   {p.description}
                 </p>
 
                 {/* Sub-steps */}
-                <div className="mt-4 pt-4 border-t border-white/5 flex flex-wrap gap-2">
+                <div className="mt-3.5 pt-3.5 border-t border-white/5 flex flex-wrap gap-1.5">
                   {p.details.map((detail) => (
                     <span
                       key={detail}
-                      className="px-2.5 py-1 rounded bg-[#25292B] text-xs font-geist text-[#C3C8C1] border border-white/5"
+                      className="px-2 py-0.5 rounded bg-[#17191C] text-[11px] font-geist text-[#A5A7AA] border border-white/5"
                     >
                       {detail}
                     </span>

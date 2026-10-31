@@ -98,3 +98,4 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
     </SmoothScrollContext.Provider>
   );
 };
+

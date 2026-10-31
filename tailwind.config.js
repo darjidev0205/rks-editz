@@ -8,51 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        obsidian: "#101214",
+        background: {
+          DEFAULT: "#0D0E10",
+          secondary: "#17191C",
+        },
         surface: {
-          DEFAULT: "#121416",
-          dim: "#121416",
-          bright: "#38393c",
-          lowest: "#0c0e10",
-          low: "#1a1c1e",
-          container: "#1e2022",
-          high: "#282a2c",
-          highest: "#333537",
+          DEFAULT: "#202226",
+          elevated: "#292C30",
         },
-        graphite: "#1C2022",
-        elevated: "#25292B",
-        sage: {
-          DEFAULT: "#C4D6C6",
-          light: "#E0F2E2",
-          radiance: "#DCE8DD",
-          dark: "#4D5D51",
+        primary: {
+          DEFAULT: "#F4F3EF",
+          button: "#E8E7E3",
+          hover: "#D4D3CF",
+          dark: "#111214",
         },
-        ivory: "#F5F3ED",
-        silver: "#A3AAA9",
-        editorial: {
-          bg: "#ECECE6",
-          text: "#171A19",
-          border: "rgba(20, 25, 22, 0.12)",
+        secondary: {
+          DEFAULT: "#A5A7AA",
         },
-        outline: {
-          DEFAULT: "#8d928c",
-          variant: "#434843",
-        },
-        "on-surface": "#e2e2e5",
-        "on-surface-variant": "#c3c8c1",
-        "primary-container": "#c4d6c6",
-        "on-primary-fixed": "#101f15",
+      },
+      borderColor: {
+        subtle: "rgba(255, 255, 255, 0.12)",
       },
       fontFamily: {
-        geist: ["Geist", "sans-serif"],
-        inter: ["Inter", "sans-serif"],
+        geist: ["Geist", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        inter: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
       letterSpacing: {
         eyebrow: "0.18em",
-        tighter: "-0.04em",
+        tightest: "-0.04em",
       },
-      backdropBlur: {
-        xs: "2px",
+      borderRadius: {
+        card: "14px",
       },
     },
   },

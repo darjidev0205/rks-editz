@@ -8,15 +8,12 @@ import { About } from './components/about/About';
 import { CreativeProcess } from './components/process/CreativeProcess';
 import { Contact } from './components/contact/Contact';
 import { Footer } from './components/footer/Footer';
-import { ProjectModal } from './components/works/ProjectModal';
 import { WhatsAppButton } from './components/ui/WhatsAppButton';
-import { PROJECTS } from './data/projects';
 
 export function App() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
-  // Active section tracking
+  // Active section tracking for navbar
   useEffect(() => {
     const sectionIds = ['hero', 'works', 'services', 'about', 'process', 'contact'];
     
@@ -40,29 +37,27 @@ export function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const selectedProject = PROJECTS.find((p) => p.id === selectedProjectId) || null;
-
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[#101214] text-[#E2E2E5] selection:bg-[#C4D6C6] selection:text-[#101F15] overflow-x-hidden flex flex-col justify-between">
+      <div className="relative min-h-screen bg-[#0D0E10] text-[#F4F3EF] selection:bg-[#E8E7E3] selection:text-[#111214] overflow-x-hidden flex flex-col justify-between">
         {/* Floating Apple-Inspired Glass Navbar */}
         <GlassNavbar activeSection={activeSection} />
 
         {/* Main Content Sections */}
         <main className="flex-grow">
           {/* 1. Hero Section */}
-          <Hero onOpenProject={(id) => setSelectedProjectId(id)} />
+          <Hero />
 
-          {/* 2. Selected Work Gallery */}
-          <SelectedWork onOpenProject={(id) => setSelectedProjectId(id)} />
+          {/* 2. Selected Work Gallery - Inline Playback, Balanced Editorial Grid */}
+          <SelectedWork />
 
           {/* 3. Services ("What I Do") */}
           <Services />
 
-          {/* 4. About ("Behind the Edit" Light Monograph Transition) */}
+          {/* 4. About ("Behind the Edit") */}
           <About />
 
-          {/* 5. Creative Process (Return to Obsidian Dark Theme) */}
+          {/* 5. Creative Process */}
           <CreativeProcess />
 
           {/* 6. Contact Finale */}
@@ -72,13 +67,7 @@ export function App() {
         {/* 7. Footer */}
         <Footer />
 
-        {/* Interactive Project Modal */}
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProjectId(null)}
-        />
-
-        {/* Floating WhatsApp Action Button */}
+        {/* Monochromatic Apple-style Floating Contact / WhatsApp Button */}
         <WhatsAppButton />
       </div>
     </SmoothScrollProvider>

@@ -80,3 +80,4 @@ This project is pre-configured for instant zero-configuration deployment on [Ver
 - Framework Preset: `Vite`
 - Build Command: `npm run build`
 - Output Directory: `dist`
+

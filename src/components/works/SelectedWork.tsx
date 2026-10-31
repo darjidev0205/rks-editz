@@ -7,76 +7,54 @@ import { ProjectCard } from './ProjectCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface SelectedWorkProps {
-  onOpenProject: (id: string) => void;
-}
-
-export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenProject }) => {
+export const SelectedWork: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All');
+  const [activePlayingId, setActivePlayingId] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   const filteredProjects = PROJECTS.filter((project) => {
     if (activeCategory === 'All') return true;
     return project.category === activeCategory;
   });
 
-  const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 5);
+  const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
+
+  // Pause playback when switching categories
+  const handleCategoryChange = (category: ProjectCategory) => {
+    setActiveCategory(category);
+    setActivePlayingId(null);
+  };
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // 1. Heading masked entrance
+      // Heading subtle entrance
       if (headingRef.current) {
         gsap.fromTo(
           headingRef.current.children,
-          { opacity: 0, y: 25 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.7,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headingRef.current,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none reverse',
             },
           }
         );
       }
 
-      // 2. Cards stagger reveal on scroll
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll('article');
-        cards.forEach((card, i) => {
-          gsap.fromTo(
-            card,
-            {
-              opacity: 0,
-              y: 40,
-              scale: 0.98,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.85,
-              delay: (i % 2) * 0.12,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 88%',
-                toggleActions: 'play none none reverse',
-              },
-            }
-          );
-        });
-      }
+      // Refresh ScrollTrigger after gallery renders
+      ScrollTrigger.refresh();
     }, sectionRef);
 
     return () => ctx.revert();
@@ -86,35 +64,35 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenProject }) => 
     <section
       ref={sectionRef}
       id="works"
-      className="relative pt-20 md:pt-32 pb-20 md:pb-28 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-[1600px] mx-auto border-t border-white/8"
+      className="relative pt-16 md:pt-24 pb-20 md:pb-28 px-4 sm:px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/10"
     >
       {/* Section Header */}
-      <div ref={headingRef} className="mb-8 md:mb-12 max-w-3xl">
+      <div ref={headingRef} className="mb-8 md:mb-10 max-w-2xl">
         <div className="flex items-center gap-2 mb-2">
-          <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#C4C7C9] font-medium">
+          <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium">
             PORTFOLIO
           </span>
         </div>
-        <h2 className="font-geist text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#E2E2E5]">
+        <h2 className="font-geist text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#F4F3EF]">
           Selected Work.
         </h2>
-        <p className="font-inter text-sm sm:text-base text-[#A3AAA9] mt-2 leading-relaxed">
+        <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5 leading-relaxed">
           Different formats. One commitment to the story.
         </p>
       </div>
 
-      {/* Filter Pills with Horizontal Scroll on Mobile */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-8 sm:mb-10 -mx-5 px-5 sm:mx-0 sm:px-0">
+      {/* Filter Pills */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0">
         {CATEGORIES.map((category) => {
           const isActive = activeCategory === category;
           return (
             <button
               key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-full font-geist text-xs tracking-wider whitespace-nowrap transition-all duration-200 active:scale-95 ${
+              onClick={() => handleCategoryChange(category)}
+              className={`px-3.5 py-1.5 rounded-full font-geist text-xs tracking-wide whitespace-nowrap transition-all duration-200 active:scale-95 ${
                 isActive
-                  ? 'bg-[#282A2C] text-[#C4D6C6] border border-[#C4D6C6]/40 shadow-sm font-medium'
-                  : 'bg-[#1A1C1E] text-[#A3AAA9] border border-white/6 hover:text-white hover:border-white/15'
+                  ? 'bg-[#E8E7E3] text-[#111214] font-medium shadow-sm'
+                  : 'bg-[#17191C] text-[#A5A7AA] border border-white/10 hover:text-[#F4F3EF] hover:border-white/20'
               }`}
             >
               {category}
@@ -123,52 +101,154 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenProject }) => 
         })}
       </div>
 
-      {/* Asymmetric Works Grid */}
-      <div ref={gridRef} className="space-y-6 md:space-y-8">
-        {/* Row 1: Featured 16:9 Documentary */}
-        {displayedProjects[0] && (
-          <div className="w-full">
-            <ProjectCard
-              project={displayedProjects[0]}
-              onOpen={onOpenProject}
-              className="w-full"
-            />
-          </div>
-        )}
+      {/* Curated Editorial Asymmetric 12-Column Grid (Desktop) & Responsive Mobile */}
+      <div ref={galleryRef}>
+        {/* DESKTOP LAYOUT (Hidden on mobile) */}
+        <div className="hidden md:grid md:grid-cols-12 gap-4 lg:gap-5">
+          {/* Row 1: 7 cols Landscape + 5 cols Portrait */}
+          {displayedProjects[0] && (
+            <div className="md:col-span-7 flex flex-col justify-end">
+              <ProjectCard
+                project={displayedProjects[0]}
+                isPlaying={activePlayingId === displayedProjects[0].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          )}
 
-        {/* Row 2: 9:16 Portrait Pair (Side-by-side) */}
-        {displayedProjects.length > 2 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <ProjectCard
-              project={displayedProjects[1]}
-              onOpen={onOpenProject}
-              isPortrait={true}
-            />
-            <ProjectCard
-              project={displayedProjects[2]}
-              onOpen={onOpenProject}
-              isPortrait={true}
-            />
-          </div>
-        )}
+          {displayedProjects[1] && (
+            <div className="md:col-span-5 flex flex-col justify-end">
+              <ProjectCard
+                project={displayedProjects[1]}
+                isPlaying={activePlayingId === displayedProjects[1].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          )}
 
-        {/* Row 3: Landscape Campaign & Remaining Projects */}
-        {displayedProjects.slice(3).map((project) => (
-          <div key={project.id} className="w-full">
-            <ProjectCard
-              project={project}
-              onOpen={onOpenProject}
-            />
-          </div>
-        ))}
+          {/* Row 2: Three project cards (4 cols each = 12 cols) */}
+          {displayedProjects.slice(2, 5).map((project) => (
+            <div key={project.id} className="md:col-span-4 flex flex-col justify-end">
+              <ProjectCard
+                project={project}
+                isPlaying={activePlayingId === project.id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          ))}
+
+          {/* Row 3: Two medium project cards (7 cols + 5 cols or 8 cols + 4 cols) */}
+          {displayedProjects.slice(5, 7).map((project, idx) => (
+            <div
+              key={project.id}
+              className={`${idx === 0 ? 'md:col-span-7' : 'md:col-span-5'} flex flex-col justify-end`}
+            >
+              <ProjectCard
+                project={project}
+                isPlaying={activePlayingId === project.id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          ))}
+
+          {/* Remaining if showAll is active */}
+          {displayedProjects.slice(7).map((project) => (
+            <div key={project.id} className="md:col-span-6 flex flex-col justify-end">
+              <ProjectCard
+                project={project}
+                isPlaying={activePlayingId === project.id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* MOBILE LAYOUT (<768px): Curated, Compact, No Overflow */}
+        <div className="md:hidden space-y-3.5">
+          {/* Card 1: Featured Landscape full width */}
+          {displayedProjects[0] && (
+            <div className="w-full">
+              <ProjectCard
+                project={displayedProjects[0]}
+                isPlaying={activePlayingId === displayedProjects[0].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          )}
+
+          {/* Cards 2 & 3: Two portrait reels side by side */}
+          {displayedProjects.length > 2 && (
+            <div className="grid grid-cols-2 gap-2.5">
+              <ProjectCard
+                project={displayedProjects[1]}
+                isPlaying={activePlayingId === displayedProjects[1].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+              <ProjectCard
+                project={displayedProjects[2]}
+                isPlaying={activePlayingId === displayedProjects[2].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          )}
+
+          {/* Card 4: Landscape or next item */}
+          {displayedProjects[3] && (
+            <div className="w-full">
+              <ProjectCard
+                project={displayedProjects[3]}
+                isPlaying={activePlayingId === displayedProjects[3].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          )}
+
+          {/* Cards 5 & 6: Pair or stacked */}
+          {displayedProjects.length > 5 ? (
+            <div className="grid grid-cols-2 gap-2.5">
+              <ProjectCard
+                project={displayedProjects[4]}
+                isPlaying={activePlayingId === displayedProjects[4].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+              <ProjectCard
+                project={displayedProjects[5]}
+                isPlaying={activePlayingId === displayedProjects[5].id}
+                onPlay={(id) => setActivePlayingId(id)}
+                onPause={() => setActivePlayingId(null)}
+              />
+            </div>
+          ) : (
+            displayedProjects[4] && (
+              <div className="w-full">
+                <ProjectCard
+                  project={displayedProjects[4]}
+                  isPlaying={activePlayingId === displayedProjects[4].id}
+                  onPlay={(id) => setActivePlayingId(id)}
+                  onPause={() => setActivePlayingId(null)}
+                />
+              </div>
+            )
+          )}
+        </div>
 
         {filteredProjects.length === 0 && (
-          <div className="py-16 text-center border border-dashed border-white/10 rounded-2xl">
-            <Sparkles className="w-8 h-8 text-[#A3AAA9] mx-auto mb-3" />
-            <p className="font-geist text-base text-[#E2E2E5]">No projects found in this category.</p>
+          <div className="py-12 text-center border border-dashed border-white/10 rounded-xl">
+            <Sparkles className="w-6 h-6 text-[#A5A7AA] mx-auto mb-2" />
+            <p className="font-geist text-sm text-[#F4F3EF]">No projects in this category.</p>
             <button
-              onClick={() => setActiveCategory('All')}
-              className="mt-4 text-xs font-geist text-[#C4D6C6] underline hover:text-white"
+              onClick={() => handleCategoryChange('All')}
+              className="mt-2 text-xs font-geist text-[#E8E7E3] underline"
             >
               View all works
             </button>
@@ -176,15 +256,15 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onOpenProject }) => 
         )}
       </div>
 
-      {/* View All Projects Button */}
-      {filteredProjects.length > 5 && (
-        <div className="mt-10 sm:mt-14 text-center">
+      {/* View All Button */}
+      {filteredProjects.length > 6 && (
+        <div className="mt-10 text-center">
           <button
             onClick={() => setShowAll(!showAll)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-4 px-8 rounded-xl border border-white/15 hover:border-white/30 bg-[#1C2022] hover:bg-[#25292B] text-[#C4C7C9] hover:text-white font-geist text-xs tracking-widest uppercase transition-all duration-200 active:scale-98 shadow-lg"
+            className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg border border-white/12 bg-[#202226] hover:bg-[#292C30] text-[#F4F3EF] font-geist text-xs tracking-wider uppercase transition-all duration-200 active:scale-98"
           >
             <span>{showAll ? 'Show Fewer Projects' : `View All Projects (${filteredProjects.length})`}</span>
-            <ArrowUpRight className="w-4 h-4 text-[#C4D6C6]" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#F4F3EF]" />
           </button>
         </div>
       )}
