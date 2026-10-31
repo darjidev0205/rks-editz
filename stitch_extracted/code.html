@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>RKA EDITZ — Krish Patel | Video Editor &amp; Creative Producer</title>
+<!-- Material Symbols & Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#e2e2e5",
+            "secondary-fixed": "#e0e3e5",
+            "primary-fixed-dim": "#b9cbbb",
+            "on-secondary-fixed-variant": "#434749",
+            "surface": "#121416",
+            "error-container": "#93000a",
+            "secondary": "#c4c7c9",
+            "tertiary": "#ffe8ea",
+            "background": "#121416",
+            "on-secondary-container": "#b5b9bb",
+            "on-tertiary": "#412a2d",
+            "primary-container": "#c4d6c6",
+            "secondary-container": "#464a4c",
+            "inverse-surface": "#e2e2e5",
+            "on-error": "#690005",
+            "primary": "#e0f2e2",
+            "secondary-fixed-dim": "#c4c7c9",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e7d7",
+            "inverse-primary": "#526255",
+            "on-primary-fixed-variant": "#3b4a3f",
+            "surface-container-highest": "#333537",
+            "on-surface-variant": "#c3c8c1",
+            "surface-variant": "#333537",
+            "surface-container-lowest": "#0c0e10",
+            "surface-container-high": "#282a2c",
+            "surface-dim": "#121416",
+            "surface-bright": "#38393c",
+            "inverse-on-surface": "#2f3133",
+            "on-primary-fixed": "#101f15",
+            "outline-variant": "#434843",
+            "outline": "#8d928c",
+            "on-secondary-fixed": "#181c1e",
+            "on-tertiary-fixed-variant": "#594043",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed": "#2a1619",
+            "on-secondary": "#2d3133",
+            "tertiary-fixed": "#fedadd",
+            "surface-tint": "#b9cbbb",
+            "tertiary-container": "#ecc9cc",
+            "tertiary-fixed-dim": "#e0bec1",
+            "on-primary": "#253429",
+            "surface-container": "#1e2022",
+            "on-surface": "#e2e2e5",
+            "surface-container-low": "#1a1c1e",
+            "on-tertiary-container": "#6d5356",
+            "on-primary-container": "#4d5d51"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-desktop": "4.5rem",
+            "margin": "1.25rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "space-xl": "3rem",
+            "space-lg": "1.75rem",
+            "space-md": "1rem",
+            "gutter-desktop": "2.5rem",
+            "margin-tablet": "2.5rem"
+          },
+          "fontFamily": {
+            "body-default": ["Inter"],
+            "caption": ["Inter"],
+            "display-hero-mobile": ["Geist"],
+            "headline-sm": ["Geist"],
+            "eyebrow-tracked": ["Geist"],
+            "headline-lg": ["Geist"],
+            "display-hero": ["Geist"],
+            "body-diminished": ["Inter"],
+            "headline-xl-mobile": ["Geist"],
+            "headline-md": ["Geist"],
+            "body-lead": ["Inter"],
+            "headline-xl": ["Geist"],
+            "label-mono": ["Geist"]
+          },
+          "fontSize": {
+            "body-default": ["1rem", { "lineHeight": "1.65rem", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "caption": ["0.75rem", { "lineHeight": "1.1rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "display-hero-mobile": ["2.75rem", { "lineHeight": "3rem", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.015em", "fontWeight": "500" }],
+            "eyebrow-tracked": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.18em", "fontWeight": "600" }],
+            "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+            "display-hero": ["5rem", { "lineHeight": "5.25rem", "letterSpacing": "-0.04em", "fontWeight": "600" }],
+            "body-diminished": ["0.875rem", { "lineHeight": "1.45rem", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-xl-mobile": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+            "body-lead": ["1.25rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-xl": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.035em", "fontWeight": "500" }],
+            "label-mono": ["0.8125rem", { "lineHeight": "1.15rem", "letterSpacing": "0.02em", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Hide scrollbars cleanly for mobile film strip */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-fixed min-h-screen flex justify-center">
+<!-- Mobile Viewport Container (390px maximum width simulation) -->
+<div class="w-full max-w-[390px] relative bg-surface-dim min-h-screen overflow-x-hidden shadow-2xl flex flex-col">
+<!-- 1. Floating Capsule TopAppBar (Shared Component Implementation) -->
+<header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[358px] rounded-full z-50 bg-surface-container/80 dark:bg-surface-container/80 backdrop-blur-md border border-outline-variant/30 shadow-2xl shadow-black/40">
+<div class="flex justify-between items-center px-5 py-3 w-full">
+<!-- Brand Monogram -->
+<a class="flex items-center gap-2 group" href="#hero">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="movie_edit">movie_edit</span>
+<span class="text-headline-md font-headline-md tracking-tight text-on-surface dark:text-on-surface font-semibold text-lg">RKA.</span>
+</a>
+<!-- Drawer Trigger -->
+<button aria-label="Open Navigation Menu" class="min-w-[44px] min-h-[44px] flex items-center justify-end text-on-surface-variant hover:text-primary transition-colors active:scale-95" id="menu-btn">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- Side Navigation Drawer (Shared Component Implementation) -->
+<div class="fixed inset-y-0 right-0 w-full max-w-[340px] z-50 bg-surface-container-low/95 dark:bg-surface-container-low/95 backdrop-blur-xl border-l border-outline-variant/20 shadow-2xl shadow-surface-container-lowest/80 translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between p-8" id="nav-drawer">
+<div>
+<div class="flex items-center justify-between pb-8 border-b border-outline-variant/20">
+<div>
+<h2 class="text-headline-md font-headline-md font-semibold tracking-tighter text-on-surface">Krish Patel</h2>
+<p class="text-caption font-caption text-on-surface-variant">Director &amp; Video Editor</p>
+</div>
+<button aria-label="Close menu" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95" id="close-drawer-btn">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<nav class="mt-8 space-y-3">
+<!-- Featured Works (Active Mapping) -->
+<a class="flex items-center gap-4 text-primary dark:text-primary bg-surface-container-high/60 px-4 py-3 rounded-lg border border-outline-variant/40" href="#works">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+<span class="text-body-default font-body-default font-medium">Featured Works</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-container-highest/40 hover:text-primary transition-all" href="#process">
+<span class="material-symbols-outlined" data-icon="timeline">timeline</span>
+<span class="text-body-default font-body-default">Creative Process</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-container-highest/40 hover:text-primary transition-all" href="#about">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-body-default font-body-default">Behind the Edit</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-container-highest/40 hover:text-primary transition-all" href="#contact">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="text-body-default font-body-default">Inquiries</span>
+</a>
+</nav>
+</div>
+<div class="pt-6 border-t border-outline-variant/20">
+<span class="text-label-mono font-label-mono text-outline uppercase tracking-wider block">RKA EDITZ • 2024 ARCHIVE</span>
+<span class="text-caption font-caption text-on-surface-variant/60 mt-1 block">Ahmedabad • Commercial &amp; Narrative</span>
+</div>
+</div>
+<!-- Drawer Backdrop -->
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300" id="drawer-backdrop"></div>
+<!-- MAIN EDITORIAL CONTENT -->
+<main class="flex-grow pt-24">
+<!-- 2. HERO SECTION -->
+<section class="px-8 pt-4 pb-12 flex flex-col justify-start" id="hero">
+<!-- Eyebrow -->
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-secondary uppercase tracking-[0.18em]">INDEPENDENT CREATIVE / AHMEDABAD</span>
+</div>
+<!-- Headline -->
+<h1 class="text-[44px] leading-[46px] font-headline-xl-mobile font-semibold tracking-tight text-on-surface uppercase mb-5">
+          Stories,<br/>
+          Shaped to<br/>
+<span class="text-primary-container">Stay.</span>
+</h1>
+<!-- Subhead -->
+<p class="text-body-default font-body-default text-on-surface-variant max-w-xs mb-4">
+          Video editing, motion and visual storytelling for creators and brands.
+        </p>
+<!-- Signature -->
+<div class="text-label-mono font-label-mono text-outline uppercase tracking-wider text-[11px] mb-8">
+          KRISH PATEL — THE CREATIVE BEHIND RKA EDITZ
+        </div>
+<!-- CTAs -->
+<div class="flex items-center gap-4 mb-10">
+<a class="px-6 py-3 rounded-full bg-primary-container hover:bg-primary-fixed text-on-primary-fixed font-headline-sm font-medium text-sm transition-colors duration-200 inline-flex items-center gap-1.5" href="#works">
+<span>Explore Work</span>
+<span class="text-xs">↗</span>
+</a>
+<a class="px-4 py-3 text-secondary hover:text-on-surface font-headline-sm font-normal text-sm transition-colors duration-200" href="#contact">
+            Let's Connect
+          </a>
+</div>
+<!-- Staggered Media Composition -->
+<div class="relative w-full mt-2">
+<!-- Primary 9:16 Portrait Card (User Image 3) -->
+<div class="w-[85%] rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container shadow-2xl relative">
+<div class="aspect-[9/14] w-full relative">
+<img alt="Noir Luxe commercial film still with editorial fashion framing" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6oRbG6Rl3fL7gv02vLkjiAPbzuAKkeB9rvgkbfsuA_1TzrWYcg0x6SFryc3ug_7m5ofnGsXRgChrll2pH6euz6mFA67kiO04s6IdJDcxjmwYDpwNUmMfO9mr65cHPEg-Fm5bqjaHaFcsy2ISQCyWJJbYsSuErYbIgKMeSrN8ZDIAOCGn92Lz2Kk7kvqw9r1geDOL-VGVfJuoZYlJJKgJR5hVB7VdVcNNZt6wylDs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/30"></div>
+<!-- Card Badge Overlay -->
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+<div>
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-primary-container text-[10px] tracking-wider block">01 / COMMERCIAL</span>
+<span class="text-headline-sm font-headline-sm text-on-surface text-xs font-semibold">NOIR LUXE</span>
+</div>
+<div class="w-7 h-7 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center border border-outline-variant/40">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="play_arrow">play_arrow</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Staggered Secondary Landscape Preview (User Image 4) -->
+<div class="w-[65%] absolute -bottom-6 -right-2 rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-high shadow-2xl z-10">
+<div class="aspect-video w-full relative">
+<img alt="Luthier craftsman violin workshop documentary still" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL7hs5BjUXjdMSI2igwgLmUoEk9veFXsFLCfkh3IGYtOenOuY23MHjOtCDCXfLMJI4ctTNDxqJ8tVndTGPazxR65oa_F7Wwb6y_Ka9SdixuI7qI6efCmUJYL5vZwNfcm4abKZ6HIRzY6Qs36Ebx_Onm5GHCylUA6d_jQZcX24vak72PmMlrPZJ6d78IFTYgynKrIuzxg85LRJfMLKeJZSaw29bz6rax771ARPkcQ4"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-xs text-[9px] font-label-mono text-on-surface-variant">
+                35MM REEL
+              </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SELECTED WORK SECTION -->
+<section class="px-5 pt-16 pb-12 border-t border-outline-variant/20" id="works">
+<!-- Section Header -->
+<div class="mb-6">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-secondary uppercase tracking-[0.18em]">PORTFOLIO</span>
+</div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Selected Work.</h2>
+<p class="text-body-diminished font-body-diminished text-on-surface-variant mt-1">
+            Different formats. One commitment to the story.
+          </p>
+</div>
+<!-- Filter Pill Scrollbar -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-4 mb-6 -mx-5 px-5">
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-high text-primary border border-outline-variant/50 text-caption font-label-mono whitespace-nowrap active:scale-95">All</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/20 hover:text-on-surface text-caption font-label-mono whitespace-nowrap active:scale-95">Documentaries</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/20 hover:text-on-surface text-caption font-label-mono whitespace-nowrap active:scale-95">Short Form</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/20 hover:text-on-surface text-caption font-label-mono whitespace-nowrap active:scale-95">3D &amp; Motion</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/20 hover:text-on-surface text-caption font-label-mono whitespace-nowrap active:scale-95">Commercial</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-low text-secondary border border-outline-variant/20 hover:text-on-surface text-caption font-label-mono whitespace-nowrap active:scale-95">Travel</button>
+</div>
+<!-- Works Grid -->
+<div class="space-y-6">
+<!-- Card 1: 16:9 Featured Documentary (Image 4) -->
+<article class="bg-surface-container rounded-lg overflow-hidden border border-outline-variant/20 group">
+<div class="aspect-video relative overflow-hidden bg-surface-container-lowest">
+<img alt="Master luthier handcrafting wooden violin under warm directional lamp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL7hs5BjUXjdMSI2igwgLmUoEk9veFXsFLCfkh3IGYtOenOuY23MHjOtCDCXfLMJI4ctTNDxqJ8tVndTGPazxR65oa_F7Wwb6y_Ka9SdixuI7qI6efCmUJYL5vZwNfcm4abKZ6HIRzY6Qs36Ebx_Onm5GHCylUA6d_jQZcX24vak72PmMlrPZJ6d78IFTYgynKrIuzxg85LRJfMLKeJZSaw29bz6rax771ARPkcQ4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<!-- Play Indicator & Duration -->
+<div class="absolute top-3 right-3 px-2 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-md text-[10px] font-label-mono text-on-surface border border-outline-variant/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px] text-primary" data-icon="timer">timer</span>
+<span>04:12</span>
+</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-11 h-11 rounded-full bg-surface-container-lowest/70 backdrop-blur-md flex items-center justify-center border border-outline-variant/40 group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary text-xl ml-0.5" data-icon="play_arrow">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex justify-between items-start">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium">The Artisan's Touch</h3>
+<p class="text-caption font-caption text-secondary mt-0.5">Documentary / 35mm</p>
+</div>
+<span class="text-label-mono font-label-mono text-outline text-xs mt-1">2024</span>
+</div>
+</article>
+<!-- Row 2: 9:16 Portrait Pair (Side-by-side) -->
+<div class="grid grid-cols-2 gap-3.5">
+<!-- Card A: Aura SS25 (Image 3) -->
+<article class="bg-surface-container rounded-lg overflow-hidden border border-outline-variant/20 flex flex-col">
+<div class="aspect-[9/15] relative overflow-hidden bg-surface-container-lowest">
+<img alt="Editorial fashion model posing in gothic stone corridor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6oRbG6Rl3fL7gv02vLkjiAPbzuAKkeB9rvgkbfsuA_1TzrWYcg0x6SFryc3ug_7m5ofnGsXRgChrll2pH6euz6mFA67kiO04s6IdJDcxjmwYDpwNUmMfO9mr65cHPEg-Fm5bqjaHaFcsy2ISQCyWJJbYsSuErYbIgKMeSrN8ZDIAOCGn92Lz2Kk7kvqw9r1geDOL-VGVfJuoZYlJJKgJR5hVB7VdVcNNZt6wylDs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute bottom-2 left-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[9px] font-label-mono text-primary border border-outline-variant/30">
+                    VERTICAL
+                  </span>
+</div>
+</div>
+<div class="p-3">
+<h4 class="text-headline-sm font-headline-sm text-on-surface text-sm font-medium leading-snug">Aura SS25</h4>
+<p class="text-caption font-caption text-secondary text-xs mt-0.5">Fashion Film</p>
+</div>
+</article>
+<!-- Card B: Tokyo Rain Echoes (Image 6) -->
+<article class="bg-surface-container rounded-lg overflow-hidden border border-outline-variant/20 flex flex-col">
+<div class="aspect-[9/15] relative overflow-hidden bg-surface-container-lowest">
+<img alt="Cinematic night rain street in Tokyo illuminated by neon ramen lanterns" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHvvLPgP-25amfCD0a87qPD0ih7TX0IpPYvtOY3K7Al6alUbpb7H9Ebwi2X2nP-9DnD3c1xoUi0M81azfvrELpDU65XqvfBFTRHvUFYDhf1x8uQBTttjd0NFnNKkm6ZeS5ElVwjkx14QeQzhsVKgo8iaAW5eBtYfnsat1EGQc0wYGbGPmk8GHkG2KydMGXpw4hEo0bnvKWMGMgd3-VPc1gLN6Kr8sjKXd1avx3TFg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute bottom-2 left-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[9px] font-label-mono text-primary-fixed-dim border border-outline-variant/30">
+                    GRADE
+                  </span>
+</div>
+</div>
+<div class="p-3">
+<h4 class="text-headline-sm font-headline-sm text-on-surface text-sm font-medium leading-snug">Tokyo Rain Echoes</h4>
+<p class="text-caption font-caption text-secondary text-xs mt-0.5">Short Form / Grade</p>
+</div>
+</article>
+</div>
+<!-- Card 3: Full-width Landscape "Midnight Horizon" -->
+<article class="bg-surface-container rounded-lg overflow-hidden border border-outline-variant/20 group">
+<div class="aspect-[16/9] relative overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="A striking cinematic widescreen film frame showing a sleek modern vehicle speeding along a desert highway at twilight under deep cobalt and obsidian skies with soft taillight streaks. High contrast cinematic lighting with warm tungsten lamp accents and muted sage foliage on the shoulder. Minimalist and refined tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjXhGeuTRHyCOW81rac4_210Sb45F5zJi_wLYdnY3xRN_BS8WYVnKUloNYr3isJgQGo8IXAShjLZ1AvL6q66CKT8dqWrDM_nLKRrto4KviBsR3EfLwZ32X1aivKaiCaqI68XWYpSGh_Uo96OvkqYaxG1713-DjVzD2N1f_6Dpx1GMzqFMNUn5Wx97K0tJprvpFnK6CcuWoPOTussAZjvI6dYzfZaYIeU0w3_loPg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-primary-container text-[10px] tracking-wider block">CAMPAIGN</span>
+</div>
+</div>
+<div class="p-4 flex justify-between items-center">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium">Midnight Horizon</h3>
+<p class="text-caption font-caption text-secondary mt-0.5">Commercial / Automotive</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-secondary border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm" data-icon="north_east">north_east</span>
+</div>
+</div>
+</article>
+</div>
+<!-- View All Projects Button -->
+<div class="mt-8 text-center">
+<button class="w-full py-3.5 px-6 rounded-lg border border-outline-variant/30 hover:border-outline text-secondary hover:text-on-surface font-label-mono text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2 active:scale-[0.99]">
+<span>View All Projects (14)</span>
+<span class="text-primary">↗</span>
+</button>
+</div>
+</section>
+<!-- 4. SERVICES ("WHAT I DO") -->
+<section class="px-5 py-14 border-t border-outline-variant/20 bg-surface-container-low/50">
+<div class="mb-8">
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-secondary uppercase tracking-[0.18em]">CAPABILITIES</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight mt-1">What I Do.</h2>
+<p class="text-body-diminished font-body-diminished text-on-surface-variant mt-0.5">
+            From raw ideas to the final frame.
+          </p>
+</div>
+<!-- Service Rows with Hairline Dividers -->
+<div class="divide-y divide-outline-variant/20">
+<div class="py-5 flex items-start justify-between group">
+<div class="pr-4">
+<span class="text-label-mono font-label-mono text-outline text-xs block mb-1">01</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium group-hover:text-primary transition-colors">Video Editing</h3>
+<p class="text-body-diminished font-body-diminished text-secondary mt-1">
+                Clean, thoughtful editing for powerful short- and long-form content.
+              </p>
+</div>
+<div class="pt-1 text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<div class="py-5 flex items-start justify-between group">
+<div class="pr-4">
+<span class="text-label-mono font-label-mono text-outline text-xs block mb-1">02</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium group-hover:text-primary transition-colors">3D &amp; Motion Graphics</h3>
+<p class="text-body-diminished font-body-diminished text-secondary mt-1">
+                Creative visuals and animated storytelling that simplify complex ideas.
+              </p>
+</div>
+<div class="pt-1 text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<div class="py-5 flex items-start justify-between group">
+<div class="pr-4">
+<span class="text-label-mono font-label-mono text-outline text-xs block mb-1">03</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium group-hover:text-primary transition-colors">Creative Production</h3>
+<p class="text-body-diminished font-body-diminished text-secondary mt-1">
+                Concepts, scripting, shooting and comprehensive post-production.
+              </p>
+</div>
+<div class="pt-1 text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<div class="py-5 flex items-start justify-between group">
+<div class="pr-4">
+<span class="text-label-mono font-label-mono text-outline text-xs block mb-1">04</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium group-hover:text-primary transition-colors">Social Content</h3>
+<p class="text-body-diminished font-body-diminished text-secondary mt-1">
+                Content designed for modern creators, high-growth products and brands.
+              </p>
+</div>
+<div class="pt-1 text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. ABOUT SECTION ("BEHIND THE EDIT") - Light Editorial Plate -->
+<section class="bg-[#ECECE6] text-[#171A19] px-6 py-14" id="about">
+<!-- Monograph Label -->
+<div class="flex items-center justify-between pb-4 border-b border-black/10 mb-8">
+<span class="text-[10px] font-label-mono tracking-[0.2em] uppercase text-black/60 font-semibold">DIRECTOR'S STATEMENT</span>
+<span class="text-[10px] font-label-mono text-black/40">VOL. 04</span>
+</div>
+<!-- Authentic B&W Portrait (Image 5) -->
+<div class="aspect-[4/5] w-full rounded-lg overflow-hidden bg-neutral-300 shadow-md mb-8 relative">
+<img alt="Krish Patel Director and Lead Video Editor Portrait in editing suite with dual monitors" class="w-full h-full object-cover grayscale contrast-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByuFePPDAYNXrvuAxFNFReLWWJ96A3p_ykM3PfkPOjW-YsHywRSU9wQxN6jyzb9yufW1lPxXZuKExKAhMTR9S9gyIFspzfn_fm-ZuiZCCYdhYKIr8YupT8xgZAr-b4Wk3W-bEGNwWjSWVAUtUU_wTkGW103w2sV_-7A7Dz5y3XFKkZ08I4nO6B_mdZWtiKMmxiFf0NtQe3wvpptZqqe0Bs3m0xveFl7TDT2cx1FPc"/>
+<div class="absolute bottom-3 left-3 px-2 py-1 rounded bg-black/75 backdrop-blur-md text-[#ECECE6] text-[10px] font-label-mono tracking-wider">
+            AHMEDABAD • POST-STUDIO
+          </div>
+</div>
+<h2 class="text-headline-lg font-headline-lg text-[#171A19] font-medium tracking-tight mb-4">Behind the Edit.</h2>
+<p class="text-body-default font-body-default text-black/80 leading-relaxed mb-6">
+          I'm Krish, a video editor and creative producer who loves turning ideas into visuals people want to watch. I work across storytelling, motion, filming and editing, combining creative judgment with modern production workflows.
+        </p>
+<!-- Clean Metadata Tags -->
+<div class="pt-4 border-t border-black/10 flex flex-col gap-2 font-label-mono text-xs text-black/60">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span>
+<span>Ahmedabad, India</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-black/60" data-icon="check_circle">check_circle</span>
+<span>Available for Select Commissions</span>
+</div>
+</div>
+</section>
+<!-- 6. CREATIVE PROCESS -->
+<section class="px-6 py-14 bg-surface-dim border-t border-outline-variant/20" id="process">
+<div class="mb-8">
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-secondary uppercase tracking-[0.18em]">METHODOLOGY</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight mt-1">How Ideas Become Visuals.</h2>
+</div>
+<!-- Vertical Timeline with Subtle Connectors -->
+<div class="relative pl-6 space-y-8 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[1px] before:bg-outline-variant/30">
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 rounded-full bg-surface-dim border border-primary-container"></div>
+<span class="text-label-mono font-label-mono text-primary-container text-xs">PHASE 01</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium mt-0.5">Understand</h3>
+<p class="text-body-diminished font-body-diminished text-on-surface-variant mt-1">
+              Deconstructing creative vision, tone requirements, cadence and emotional pacing before a single cut is made.
+            </p>
+</div>
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 rounded-full bg-surface-dim border border-outline-variant"></div>
+<span class="text-label-mono font-label-mono text-secondary text-xs">PHASE 02</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium mt-0.5">Create</h3>
+<p class="text-body-diminished font-body-diminished text-on-surface-variant mt-1">
+              Assembly edit, rhythm sculpting, sound design architecture and integrated graphic treatments.
+            </p>
+</div>
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 rounded-full bg-surface-dim border border-outline-variant"></div>
+<span class="text-label-mono font-label-mono text-secondary text-xs">PHASE 03</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium mt-0.5">Refine</h3>
+<p class="text-body-diminished font-body-diminished text-on-surface-variant mt-1">
+              Frame-by-frame color balancing, optical adjustments, and collaborative feedback loops.
+            </p>
+</div>
+<div class="relative">
+<div class="absolute -left-[1.8rem] top-1 w-3 h-3 rounded-full bg-surface-dim border border-primary"></div>
+<span class="text-label-mono font-label-mono text-primary text-xs">PHASE 04</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-medium mt-0.5">Deliver</h3>
+<p class="text-body-diminished font-body-diminished text-on-surface-variant mt-1">
+              Multi-platform exports, archival master deliverables and tailored short-form cuts.
+            </p>
+</div>
+</div>
+</section>
+<!-- 7. CONTACT SECTION -->
+<section class="px-6 py-14 border-t border-outline-variant/20 bg-surface-container-lowest" id="contact">
+<span class="text-eyebrow-tracked font-eyebrow-tracked text-secondary uppercase tracking-[0.18em]">NEXT PROJECT?</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight mt-2 uppercase">
+          Let's Make Something Matter.
+        </h2>
+<p class="text-body-default font-body-default text-on-surface-variant mt-3">
+          Have an idea, a story or a brand that needs better visuals? Let's talk.
+        </p>
+<!-- Primary CTA Button -->
+<div class="mt-8">
+<a class="w-full py-4 px-6 rounded-lg bg-primary-container hover:bg-primary-fixed text-on-primary-fixed font-headline-sm font-semibold text-center flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-[0.98]" href="mailto:krish@rkaeditz.com">
+<span>Start a Conversation</span>
+<span class="text-base font-bold">↗</span>
+</a>
+</div>
+<!-- Secondary Channels -->
+<div class="mt-8 pt-6 border-t border-outline-variant/20 grid grid-cols-2 gap-4">
+<a class="text-caption font-label-mono text-secondary hover:text-primary flex items-center gap-1.5" href="mailto:krish@rkaeditz.com">
+<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+<span>Email</span>
+</a>
+<a class="text-caption font-label-mono text-secondary hover:text-primary flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span>
+<span>Instagram</span>
+</a>
+<a class="text-caption font-label-mono text-secondary hover:text-primary flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="work">work</span>
+<span>LinkedIn</span>
+</a>
+<a class="text-caption font-label-mono text-secondary hover:text-primary flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+<span>WhatsApp</span>
+</a>
+</div>
+</section>
+</main>
+<!-- 8. FOOTER (Shared Component Alignment) -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 px-6 py-10">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-headline-sm font-headline-sm font-semibold text-on-surface tracking-tight">RKA EDITZ</span>
+<span class="text-caption font-label-mono text-outline">BY KRISH PATEL</span>
+</div>
+<p class="text-caption font-body-diminished text-outline leading-relaxed">
+          © 2024 RKA EDITZ. KRISH PATEL. ALL RIGHTS RESERVED. ARCHIVAL FOOTAGE &amp; COMMERCIAL EDITS.
+        </p>
+</div>
+</footer>
+</div>
+<!-- Interactive Drawer Script -->
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-drawer-btn');
+    const drawer = document.getElementById('nav-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+
+    function openDrawer() {
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('hidden');
+      setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    menuBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+
+    // Close on link click
+    document.querySelectorAll('#nav-drawer a').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+  </script>
+</body></html>
