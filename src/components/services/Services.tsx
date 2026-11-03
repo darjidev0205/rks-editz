@@ -66,7 +66,7 @@ export const Services: React.FC = () => {
             opacity: 1,
             y: 0,
             duration: 0.65,
-            stagger: 0.1,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: rowsRef.current,
@@ -85,18 +85,18 @@ export const Services: React.FC = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="relative pt-16 md:pt-24 pb-20 md:pb-28 px-4 sm:px-6 md:px-8 max-w-[1280px] mx-auto border-t border-white/10"
+      className="relative pt-20 md:pt-28 pb-20 md:pb-28 px-4 sm:px-6 md:px-10 lg:px-12 max-w-[1280px] mx-auto border-t border-white/10"
     >
       {/* Section Header */}
       <div ref={headingRef} className="mb-10 md:mb-12 max-w-2xl">
         <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium block mb-2">
-          CAPABILITIES
+          CAPABILITIES & RETAINERS
         </span>
         <h2 className="font-geist text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#F4F3EF]">
           What I Do.
         </h2>
         <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5">
-          From raw ideas to the final frame.
+          From the first assembly cut to frame-accurate master deliverables.
         </p>
       </div>
 
@@ -111,7 +111,7 @@ export const Services: React.FC = () => {
             <div
               key={service.id}
               onClick={() => setActiveService(isExpanded ? null : service.id)}
-              className="py-5 sm:py-7 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02] px-2 sm:px-3 rounded-lg"
+              className="py-5 sm:py-7 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02] px-2 sm:px-4 rounded-xl"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-grow max-w-3xl pr-4">
@@ -138,7 +138,7 @@ export const Services: React.FC = () => {
                       {service.deliverables.map((item) => (
                         <span
                           key={item}
-                          className="px-2.5 py-1 rounded bg-[#202226] border border-white/10 text-xs font-geist text-[#F4F3EF]"
+                          className="px-2.5 py-1 rounded bg-[#181B20] border border-white/10 text-xs font-geist text-[#F4F3EF]"
                         >
                           {item}
                         </span>

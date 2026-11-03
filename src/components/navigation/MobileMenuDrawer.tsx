@@ -39,9 +39,9 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
   }, [isOpen, onClose]);
 
   const navItems = [
-    { id: 'works', label: 'Featured Works', icon: Play },
+    { id: 'showcase', label: 'Portfolio Showcase', icon: Play },
+    { id: 'about', label: 'About & Approach', icon: User },
     { id: 'services', label: 'Services', icon: Activity },
-    { id: 'about', label: 'Behind the Edit', icon: User },
     { id: 'contact', label: 'Inquiries', icon: Mail },
   ];
 

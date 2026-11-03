@@ -22,10 +22,10 @@ export const GlassNavbar: React.FC<GlassNavbarProps> = ({ activeSection }) => {
   }, []);
 
   const navLinks = [
-    { id: 'works', label: 'Selected Work' },
+    { id: 'showcase', label: 'Showcase' },
+    { id: 'about', label: 'Approach' },
     { id: 'services', label: 'Services' },
-    { id: 'about', label: 'Behind the Edit' },
-    { id: 'process', label: 'Process' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (id: string) => {

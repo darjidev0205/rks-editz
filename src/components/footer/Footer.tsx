@@ -40,9 +40,9 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-inter text-xs text-[#A5A7AA]/80">
           <p>© 2024 RKA EDITZ. KRISH PATEL. ALL RIGHTS RESERVED. ARCHIVAL FOOTAGE & COMMERCIAL EDITS.</p>
           <div className="flex gap-4 font-geist text-xs text-[#A5A7AA]">
-            <a href="#works" className="hover:text-white transition-colors">Work</a>
-            <a href="#services" className="hover:text-white transition-colors">Services</a>
+            <a href="#showcase" className="hover:text-white transition-colors">Showcase</a>
             <a href="#about" className="hover:text-white transition-colors">About</a>
+            <a href="#services" className="hover:text-white transition-colors">Services</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
           </div>
         </div>

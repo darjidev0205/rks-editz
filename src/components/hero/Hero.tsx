@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, Play } from 'lucide-react';
+import { ArrowUpRight, Play, Disc3, Sparkles } from 'lucide-react';
 import { useSmoothScroll } from '../ui/SmoothScrollProvider';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,133 +14,49 @@ export const Hero: React.FC = () => {
   const headlineLine3Ref = useRef<HTMLSpanElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const subheadRef = useRef<HTMLParagraphElement>(null);
-  const signatureRef = useRef<HTMLDivElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
-  const mediaContainerRef = useRef<HTMLDivElement>(null);
-  const primaryCardRef = useRef<HTMLDivElement>(null);
-  const secondaryCardRef = useRef<HTMLDivElement>(null);
+  const clusterRef = useRef<HTMLDivElement>(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const discRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // 1. Initial Master Entrance Timeline
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 });
 
-      // Stage 2: Eyebrow reveal
-      tl.fromTo(
-        eyebrowRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6 }
-      );
+      // Eyebrow
+      tl.fromTo(eyebrowRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6 });
 
-      // Stage 3: Headline line by line mask reveal
-      const headlineLines = [
-        headlineLine1Ref.current,
-        headlineLine2Ref.current,
-        headlineLine3Ref.current,
-      ].filter(Boolean);
-
+      // Headline line masks
       tl.fromTo(
-        headlineLines,
+        [headlineLine1Ref.current, headlineLine2Ref.current, headlineLine3Ref.current],
         { y: '105%', opacity: 0 },
-        {
-          y: '0%',
-          opacity: 1,
-          duration: 0.85,
-          stagger: 0.12,
-        },
+        { y: '0%', opacity: 1, duration: 0.85, stagger: 0.12 },
         '-=0.3'
       );
 
-      // Stage 4: Supporting paragraph & signature
-      tl.fromTo(
-        [subheadRef.current, signatureRef.current],
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 },
-        '-=0.4'
-      );
+      // Subhead & CTAs
+      tl.fromTo(subheadRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4');
+      tl.fromTo(ctasRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, '-=0.3');
 
-      // Stage 5: CTAs appear
-      tl.fromTo(
-        ctasRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.5 },
-        '-=0.3'
-      );
-
-      // Stage 6: Hero media cards reveal through clip-path and gentle scale
-      if (primaryCardRef.current) {
+      // Right Upper Visual Cluster entrance
+      if (clusterRef.current) {
         tl.fromTo(
-          primaryCardRef.current,
-          {
-            clipPath: 'inset(100% 0% 0% 0%)',
-            scale: 1.06,
-            opacity: 0,
-          },
-          {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            scale: 1,
-            opacity: 1,
-            duration: 1.1,
-            ease: 'power3.inOut',
-          },
-          '-=0.6'
+          [card1Ref.current, card2Ref.current, discRef.current],
+          { opacity: 0, scale: 0.94, y: 25 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'back.out(1.2)' },
+          '-=0.5'
         );
       }
 
-      if (secondaryCardRef.current) {
-        tl.fromTo(
-          secondaryCardRef.current,
-          {
-            clipPath: 'inset(0% 0% 100% 0%)',
-            scale: 1.08,
-            opacity: 0,
-          },
-          {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            scale: 1,
-            opacity: 1,
-            duration: 1.0,
-            ease: 'power3.inOut',
-          },
-          '-=0.7'
-        );
-      }
-
-      // 2. On Scroll: Responsive Parallax & Gentle Content Fade
+      // Parallax on scroll
       ScrollTrigger.matchMedia({
-        // Desktop parallax
         '(min-width: 768px)': () => {
-          gsap.to(mediaContainerRef.current, {
-            yPercent: 10,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: 'top top',
-              end: 'bottom top',
-              scrub: 0.5,
-            },
-          });
-
-          // Text parallax slightly faster
-          gsap.to([eyebrowRef.current, headlineLine1Ref.current?.parentElement?.parentElement, subheadRef.current, ctasRef.current], {
-            y: -35,
-            opacity: 0.35,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: 'center top',
-              end: 'bottom top',
-              scrub: true,
-            },
-          });
-        },
-        // Mobile subtle parallax
-        '(max-width: 767px)': () => {
-          gsap.to(primaryCardRef.current, {
-            yPercent: 5,
+          gsap.to(clusterRef.current, {
+            yPercent: 12,
             ease: 'none',
             scrollTrigger: {
               trigger: heroRef.current,
@@ -157,51 +73,48 @@ export const Hero: React.FC = () => {
   }, []);
 
   const handleExploreClick = () => {
-    const el = document.getElementById('works');
-    if (el) {
-      scrollTo(el, { offset: -40 });
-    }
+    scrollTo('#showcase', { offset: -20 });
   };
 
   const handleConnectClick = () => {
-    const el = document.getElementById('contact');
-    if (el) {
-      scrollTo(el, { offset: -40 });
-    }
+    scrollTo('#contact', { offset: -20 });
   };
 
   return (
     <section
       ref={heroRef}
       id="hero"
-      className="relative min-h-[90vh] md:min-h-screen pt-24 md:pt-32 pb-14 md:pb-24 px-4 sm:px-6 md:px-8 max-w-[1280px] mx-auto flex flex-col justify-center overflow-hidden"
+      className="relative min-h-[92vh] md:min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 px-4 sm:px-6 md:px-10 lg:px-12 max-w-[1440px] mx-auto flex flex-col justify-center overflow-hidden"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        {/* Left Column: Typographic Narrative */}
-        <div className="lg:col-span-7 flex flex-col justify-center z-10">
+      {/* Background Cinematic Texture Layer with Subtle Vignette */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800/40 via-transparent to-transparent" />
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center relative z-10">
+        {/* Left Column: Spacious Editorial Intro */}
+        <div className="lg:col-span-7 flex flex-col justify-center">
           {/* Eyebrow */}
           <div ref={eyebrowRef} className="inline-flex items-center gap-2.5 mb-4 md:mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#F4F3EF] animate-pulse"></span>
             <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium">
-              INDEPENDENT CREATIVE / AHMEDABAD
+              RKA EDITZ • CREATIVE POST-PRODUCTION
             </span>
           </div>
 
           {/* Headline with Mask Containers */}
-          <h1 className="font-geist font-semibold tracking-tight text-[#F4F3EF] uppercase text-[38px] leading-[42px] sm:text-5xl sm:leading-[52px] md:text-6xl md:leading-[64px] lg:text-[72px] lg:leading-[76px] mb-5">
+          <h1 className="font-geist font-semibold tracking-tight text-[#F4F3EF] uppercase text-[42px] leading-[46px] sm:text-5xl sm:leading-[54px] md:text-6xl md:leading-[64px] lg:text-[74px] lg:leading-[78px] mb-5">
             <span className="block overflow-hidden py-0.5">
               <span ref={headlineLine1Ref} className="block transform-gpu">
-                Stories,
+                Crafting Edits
               </span>
             </span>
             <span className="block overflow-hidden py-0.5">
               <span ref={headlineLine2Ref} className="block transform-gpu">
-                Shaped to
+                That Hold
               </span>
             </span>
             <span className="block overflow-hidden py-0.5">
               <span ref={headlineLine3Ref} className="block transform-gpu text-[#F4F3EF]">
-                Stay.
+                Attention.
               </span>
             </span>
           </h1>
@@ -209,94 +122,105 @@ export const Hero: React.FC = () => {
           {/* Subhead */}
           <p
             ref={subheadRef}
-            className="font-inter text-[#A5A7AA] text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-3 font-normal"
+            className="font-inter text-[#A5A7AA] text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-6 font-normal"
           >
-            Video editing, motion and visual storytelling for creators and visionary brands.
+            Cinematic edits. Strong visuals. Real impact. Video editing, sound sculpting, and visual
+            storytelling engineered for high-retention brands and creators.
           </p>
 
-          {/* Technical Signature */}
-          <div
-            ref={signatureRef}
-            className="font-geist text-xs tracking-wider uppercase text-[#A5A7AA]/70 mb-7 font-medium"
-          >
-            KRISH PATEL — THE CREATIVE BEHIND RKA EDITZ
-          </div>
-
           {/* CTAs */}
-          <div ref={ctasRef} className="flex flex-wrap items-center gap-3.5">
+          <div ref={ctasRef} className="flex flex-wrap items-center gap-4 mb-8">
             <button
               onClick={handleExploreClick}
-              className="px-6 py-3 rounded-full bg-[#E8E7E3] hover:bg-[#D4D3CF] text-[#111214] font-geist font-medium text-xs sm:text-sm tracking-wide transition-all duration-200 flex items-center gap-2 group shadow-lg active:scale-95"
+              className="px-7 py-3.5 rounded-full bg-[#E8E7E3] hover:bg-[#D4D3CF] text-[#111214] font-geist font-semibold text-xs sm:text-sm tracking-wide transition-all duration-200 flex items-center gap-2 group shadow-xl active:scale-95"
             >
-              <span>Explore Work</span>
+              <span>View Work</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
             <button
               onClick={handleConnectClick}
-              className="px-5 py-3 rounded-full border border-white/12 hover:border-white/25 hover:bg-white/5 text-[#F4F3EF] font-geist text-xs sm:text-sm tracking-wide transition-all duration-200 active:scale-95"
+              className="px-6 py-3.5 rounded-full border border-white/15 hover:border-white/30 hover:bg-white/5 text-[#F4F3EF] font-geist font-medium text-xs sm:text-sm tracking-wide transition-all duration-200 active:scale-95"
             >
-              Let's Connect
+              Book a Project
             </button>
+          </div>
+
+          {/* Key Specs Pill */}
+          <div className="flex flex-wrap items-center gap-2 text-[11px] font-geist text-[#A5A7AA]/80">
+            <span className="px-2.5 py-1 rounded bg-[#17191C] border border-white/8">4K Native Mastering</span>
+            <span className="px-2.5 py-1 rounded bg-[#17191C] border border-white/8">Rhythm & Sound Design</span>
+            <span className="px-2.5 py-1 rounded bg-[#17191C] border border-white/8">High Retention Pacing</span>
           </div>
         </div>
 
-        {/* Right Column: Hero Media Preview */}
-        <div ref={mediaContainerRef} className="lg:col-span-5 relative w-full mt-4 lg:mt-0">
-          <div className="relative w-full max-w-[380px] lg:max-w-none mx-auto">
-            {/* Primary Portrait Card (NOIR LUXE) */}
-            <div
-              ref={primaryCardRef}
-              onClick={handleExploreClick}
-              className="w-[84%] rounded-card overflow-hidden border border-white/10 bg-[#202226] shadow-2xl relative cursor-pointer group"
-            >
-              <div className="aspect-[9/13] w-full relative overflow-hidden">
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6oRbG6Rl3fL7gv02vLkjiAPbzuAKkeB9rvgkbfsuA_1TzrWYcg0x6SFryc3ug_7m5ofnGsXRgChrll2pH6euz6mFA67kiO04s6IdJDcxjmwYDpwNUmMfO9mr65cHPEg-Fm5bqjaHaFcsy2ISQCyWJJbYsSuErYbIgKMeSrN8ZDIAOCGn92Lz2Kk7kvqw9r1geDOL-VGVfJuoZYlJJKgJR5hVB7VdVcNNZt6wylDs"
-                  alt="Noir Luxe commercial film still with editorial fashion framing"
-                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500 ease-out"
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0E10] via-transparent to-black/30"></div>
+        {/* Right Upper Cluster: Compact Curated Media Blocks */}
+        <div ref={clusterRef} className="lg:col-span-5 relative w-full flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-[420px] aspect-[4/4] sm:aspect-[4/3.8]">
+            {/* Ambient Back Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-slate-700/20 rounded-full blur-3xl pointer-events-none" />
 
-                {/* Card Badge Overlay */}
-                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex justify-between items-end">
+            {/* Block 1: Main Rounded Card (Studio & Timeline Still) */}
+            <div
+              ref={card1Ref}
+              onClick={handleExploreClick}
+              className="absolute top-0 right-0 w-[82%] sm:w-[80%] rounded-2xl overflow-hidden border border-white/12 bg-[#202226] shadow-2xl cursor-pointer group transition-transform duration-300 hover:scale-[1.02]"
+            >
+              <div className="aspect-[4/3] w-full relative overflow-hidden bg-[#17191C]">
+                <img
+                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop"
+                  alt="Video editing suite monitor with high contrast timeline waveforms"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0E10] via-black/30 to-transparent"></div>
+
+                <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-geist text-[#F4F3EF] border border-white/10">
+                  REEL #01 • 4K
+                </div>
+
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                   <div>
-                    <span className="font-geist text-[10px] uppercase tracking-wider text-[#A5A7AA] block font-medium">
-                      01 / COMMERCIAL
+                    <span className="text-[10px] font-geist text-[#A5A7AA] block uppercase tracking-wider">
+                      Commercial Edit
                     </span>
-                    <span className="font-geist text-xs sm:text-sm font-semibold text-[#F4F3EF] tracking-tight">
-                      NOIR LUXE
+                    <span className="text-xs sm:text-sm font-semibold font-geist text-[#F4F3EF]">
+                      Noir Luxe 35mm
                     </span>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-[#202226]/85 backdrop-blur-md flex items-center justify-center border border-white/12 group-hover:scale-105 group-hover:bg-[#E8E7E3] group-hover:text-[#111214] transition-all">
+                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 group-hover:scale-110 group-hover:bg-[#E8E7E3] group-hover:text-black transition-all">
                     <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Staggered Secondary Landscape Preview (35MM REEL) */}
+            {/* Block 2: Floating Audio / Workflow Glass Pill Card */}
             <div
-              ref={secondaryCardRef}
-              onClick={handleExploreClick}
-              className="w-[66%] absolute -bottom-5 -right-1 sm:-right-3 rounded-card overflow-hidden border border-white/12 bg-[#292C30] shadow-2xl z-20 cursor-pointer group"
+              ref={card2Ref}
+              className="absolute -bottom-2 left-0 w-[64%] rounded-xl p-3.5 bg-[#17191C]/90 backdrop-blur-xl border border-white/15 shadow-2xl z-20 flex items-center gap-3"
             >
-              <div className="aspect-video w-full relative overflow-hidden">
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL7hs5BjUXjdMSI2igwgLmUoEk9veFXsFLCfkh3IGYtOenOuY23MHjOtCDCXfLMJI4ctTNDxqJ8tVndTGPazxR65oa_F7Wwb6y_Ka9SdixuI7qI6efCmUJYL5vZwNfcm4abKZ6HIRzY6Qs36Ebx_Onm5GHCylUA6d_jQZcX24vak72PmMlrPZJ6d78IFTYgynKrIuzxg85LRJfMLKeJZSaw29bz6rax771ARPkcQ4"
-                  alt="Luthier craftsman violin workshop documentary still"
-                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500 ease-out"
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-black/25"></div>
-                <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-[#17191C]/85 backdrop-blur-md text-[9px] font-geist text-[#A5A7AA] border border-white/10">
-                  35MM REEL
-                </div>
-                <div className="absolute bottom-2 left-2">
-                  <span className="font-geist text-xs font-medium text-white block drop-shadow-md">
-                    The Artisan's Touch
-                  </span>
-                </div>
+              <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 text-[#F4F3EF]">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <span className="text-[10px] font-geist uppercase text-[#A5A7AA] block tracking-wider">
+                  Workflow Engine
+                </span>
+                <span className="text-xs font-geist font-medium text-[#F4F3EF] truncate block">
+                  DaVinci & Premiere Suite
+                </span>
+              </div>
+            </div>
+
+            {/* Block 3: Circular Camera / Lens Aperture Badge */}
+            <div
+              ref={discRef}
+              className="absolute top-16 left-2 sm:-left-3 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#202226]/90 backdrop-blur-md border border-white/15 shadow-2xl flex items-center justify-center z-10 group"
+            >
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-dashed border-white/25 flex items-center justify-center animate-[spin_20s_linear_infinite]">
+                <Disc3 className="w-6 h-6 sm:w-8 sm:h-8 text-[#A5A7AA]" />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="w-2 h-2 rounded-full bg-[#F4F3EF]"></span>
               </div>
             </div>
           </div>

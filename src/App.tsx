@@ -3,9 +3,8 @@ import { SmoothScrollProvider } from './components/ui/SmoothScrollProvider';
 import { GlassNavbar } from './components/navigation/GlassNavbar';
 import { Hero } from './components/hero/Hero';
 import { SelectedWork } from './components/works/SelectedWork';
-import { Services } from './components/services/Services';
 import { About } from './components/about/About';
-import { CreativeProcess } from './components/process/CreativeProcess';
+import { Services } from './components/services/Services';
 import { Contact } from './components/contact/Contact';
 import { Footer } from './components/footer/Footer';
 import { WhatsAppButton } from './components/ui/WhatsAppButton';
@@ -15,7 +14,7 @@ export function App() {
 
   // Active section tracking for navbar
   useEffect(() => {
-    const sectionIds = ['hero', 'works', 'services', 'about', 'process', 'contact'];
+    const sectionIds = ['hero', 'showcase', 'about', 'services', 'contact'];
     
     const handleScroll = () => {
       const scrollY = window.scrollY + window.innerHeight * 0.3;
@@ -39,35 +38,32 @@ export function App() {
 
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[#0D0E10] text-[#F4F3EF] selection:bg-[#E8E7E3] selection:text-[#111214] overflow-x-hidden flex flex-col justify-between">
+      <div className="relative min-h-screen bg-[#0A0B0D] text-[#F4F3EF] selection:bg-[#E8E7E3] selection:text-[#111214] overflow-x-hidden flex flex-col justify-between">
         {/* Floating Apple-Inspired Glass Navbar */}
         <GlassNavbar activeSection={activeSection} />
 
-        {/* Main Content Sections */}
+        {/* Main Editorial Flow */}
         <main className="flex-grow">
-          {/* 1. Hero Section */}
+          {/* 1. Hero Section (Spacious Intro + Right Upper Visual Cluster) */}
           <Hero />
 
-          {/* 2. Selected Work Gallery - Inline Playback, Balanced Editorial Grid */}
+          {/* 2. Middle Main Showcase (Staggered Vertical Cards + Horizontal Flow + Layered Photos) */}
           <SelectedWork />
 
-          {/* 3. Services ("What I Do") */}
-          <Services />
-
-          {/* 4. About ("Behind the Edit") */}
+          {/* 3. About / Approach (Layered Studio Photo + Floating Glass Statement) */}
           <About />
 
-          {/* 5. Creative Process */}
-          <CreativeProcess />
+          {/* 4. Services (Capabilities & Weekly Retainers) */}
+          <Services />
 
-          {/* 6. Contact Finale */}
+          {/* 5. Bottom Section (Two Horizontally Wide Cards + Quick Brief) */}
           <Contact />
         </main>
 
-        {/* 7. Footer */}
+        {/* 6. Footer */}
         <Footer />
 
-        {/* Monochromatic Apple-style Floating Contact / WhatsApp Button */}
+        {/* Monochromatic Quick-Chat Button */}
         <WhatsAppButton />
       </div>
     </SmoothScrollProvider>
