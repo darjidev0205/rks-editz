@@ -71,7 +71,7 @@ export const Contact: React.FC = () => {
 
   const channels = [
     { name: 'Email', icon: Mail, href: 'mailto:krish@rkaeditz.com', detail: 'krish@rkaeditz.com' },
-    { name: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/917984814882?text=Hi%20Krish,%20I%20have%20a%20project%20in%20mind', detail: '+91 79848 14882' },
+    { name: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/919537324164?text=Hi%20Krish,%20I%20have%20a%20project%20in%20mind', detail: '+91 95373 24164' },
     { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/rkaeditz', detail: '@rkaeditz' },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com', detail: 'Krish Patel' },
   ];
