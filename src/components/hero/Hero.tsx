@@ -50,22 +50,38 @@ export const Hero: React.FC = () => {
     <section
       ref={heroRef}
       id="hero"
-      className="relative w-full min-h-[92vh] sm:min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 flex flex-col justify-center overflow-hidden"
+      className="relative w-full min-h-[92vh] sm:min-h-screen pt-36 sm:pt-36 md:pt-32 pb-16 sm:pb-24 flex flex-col justify-center overflow-hidden"
     >
-      {/* LAYER 0: 4K ULTRA-HIGH RESOLUTION SEAMLESS WATERCOLOR BACKGROUND
+      {/* LAYER 0 - MOBILE ONLY (< 768px): Clean warm off-white + soft sage gradient with zero watercolor stains */}
+      <div
+        className="md:hidden absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
+        style={{
+          background: 'linear-gradient(155deg, #F7F6F0 5%, #EFF4EA 55%, #DDE9D7 100%)',
+        }}
+      >
+        {/* Subtle, soft ambient radial lighting (no dark blobs, no hard edges) */}
+        <div
+          className="absolute -top-12 -right-12 w-72 h-72 rounded-full pointer-events-none blur-[140px]"
+          style={{ background: 'radial-gradient(circle, rgba(221, 233, 215, 0.45) 0%, rgba(221, 233, 215, 0) 70%)' }}
+        />
+        <div
+          className="absolute -bottom-16 -left-16 w-80 h-80 rounded-full pointer-events-none blur-[160px]"
+          style={{ background: 'radial-gradient(circle, rgba(239, 244, 234, 0.5) 0%, rgba(239, 244, 234, 0) 70%)' }}
+        />
+      </div>
+
+      {/* LAYER 0 - DESKTOP ONLY (>= 768px): 4K ULTRA-HIGH RESOLUTION SEAMLESS WATERCOLOR BACKGROUND
           Luxury editorial aesthetic with 3840x2160 crisp resolution, fine-art handmade paper grain,
           deep forest-to-sage green washes in the lower-left & upper-right, and clean negative space.
           Seamlessly continuous throughout the entire hero with zero rectangular patches or seam lines. */}
-      <picture className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
-        {/* Mobile vertical portrait optimization */}
-        <source media="(max-width: 640px)" srcSet="/images/rka-hero-watercolor-mobile.jpg" />
+      <picture className="hidden md:block absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {/* Standard desktop 1080p optimization */}
         <source media="(max-width: 1536px)" srcSet="/images/rka-hero-watercolor-desktop.jpg" />
         {/* 4K master image for wide / high-DPI screens */}
         <img
           src={rkaWatercolor4K}
           alt="RKA Editz Organic 4K Watercolor Background"
-          className="w-full h-full object-cover object-left-bottom sm:object-center mix-blend-multiply opacity-95 contrast-[1.05] saturate-[1.12]"
+          className="w-full h-full object-cover object-center mix-blend-multiply opacity-95 contrast-[1.05] saturate-[1.12]"
           loading="eager"
           decoding="async"
         />
