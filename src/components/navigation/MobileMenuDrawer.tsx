@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Play, Activity, User, Mail, X, Layers, ArrowUpRight } from 'lucide-react';
+import { Play, Activity, User, Mail, X, Layers, ArrowUpRight, MessageSquare } from 'lucide-react';
 import { BrandLogo } from '../ui/BrandLogo';
 
 interface MobileMenuDrawerProps {
@@ -41,6 +41,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
 
   const navItems = [
     { id: 'work', label: 'Selected Work', icon: Play },
+    { id: 'testimonials', label: 'Client Stories', icon: MessageSquare },
     { id: 'about', label: 'About RKA', icon: User },
     { id: 'services', label: 'Services', icon: Layers },
     { id: 'process', label: 'Creative Process', icon: Activity },

@@ -11,6 +11,7 @@ interface GlassNavbarProps {
 const SECTIONS = [
   { id: 'hero', name: 'Hero' },
   { id: 'work', name: 'Selected Work' },
+  { id: 'testimonials', name: 'Client Story' },
   { id: 'about', name: 'About' },
   { id: 'services', name: 'Services' },
   { id: 'process', name: 'Process' },
