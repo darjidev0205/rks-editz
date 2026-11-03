@@ -14,17 +14,21 @@ export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   return (
     <aside
       aria-label="Contact on WhatsApp"
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40"
+      className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 pointer-events-auto"
+      style={{
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        paddingRight: 'env(safe-area-inset-right, 0px)',
+      }}
     >
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="group relative flex items-center gap-2.5 px-3.5 py-3 sm:px-4 sm:py-3 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg hover:shadow-xl hover:shadow-[#25D366]/25 transition-all duration-300 active:scale-95"
+        aria-label="Chat directly with Krish on WhatsApp"
+        className="group relative flex items-center gap-2.5 px-3 py-3 sm:px-4 sm:py-3 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[#25D366]/30 transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
       >
         {/* Official WhatsApp SVG glyph */}
-        <div className="w-7 h-7 sm:w-6 sm:h-6 flex items-center justify-center flex-shrink-0">
+        <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"
