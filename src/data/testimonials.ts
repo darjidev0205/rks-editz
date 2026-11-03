@@ -84,3 +84,4 @@ export const CLIENT_STORY_DATA: ClientStoryData = {
     targetSection: '#contact',
   },
 };
+
