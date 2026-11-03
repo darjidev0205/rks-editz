@@ -8,37 +8,51 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: {
-          DEFAULT: "#0D0E10",
-          secondary: "#17191C",
+        cream: {
+          DEFAULT: "#F7F6F0",
+          secondary: "#EDF2E9",
+          tint: "#F0EFE8",
+        },
+        sage: {
+          light: "#EDF2E9",
+          DEFAULT: "#DDE9D7",
+          dark: "#C3D4BC",
+        },
+        forest: {
+          light: "#2A4337",
+          DEFAULT: "#1E3027",
+          dark: "#14221B",
+          deep: "#0F1914",
+        },
+        typography: {
+          primary: "#222A25",
+          secondary: "#69736B",
+          muted: "#88948B",
         },
         surface: {
-          DEFAULT: "#202226",
-          elevated: "#292C30",
-        },
-        primary: {
-          DEFAULT: "#F4F3EF",
-          button: "#E8E7E3",
-          hover: "#D4D3CF",
-          dark: "#111214",
-        },
-        secondary: {
-          DEFAULT: "#A5A7AA",
+          DEFAULT: "#FFFFFF",
+          card: "#FFFFFF",
+          elevated: "#EDF2E9",
+          dark: "#18191C",
         },
       },
       borderColor: {
-        subtle: "rgba(255, 255, 255, 0.12)",
+        sage: "#DDE9D7",
+        subtle: "rgba(30, 48, 39, 0.08)",
+        forest: "rgba(30, 48, 39, 0.16)",
       },
       fontFamily: {
-        geist: ["Geist", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        display: ["'Space Grotesk'", "sans-serif"],
+        geist: ["Geist", "sans-serif"],
         inter: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
       },
       letterSpacing: {
         eyebrow: "0.18em",
         tightest: "-0.04em",
       },
       borderRadius: {
-        card: "14px",
+        card: "16px",
       },
     },
   },

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Play, Activity, User, Mail, X } from 'lucide-react';
+import { Play, Activity, User, Mail, X, Layers, ArrowUpRight } from 'lucide-react';
+import { BrandLogo } from '../ui/BrandLogo';
 
 interface MobileMenuDrawerProps {
   isOpen: boolean;
@@ -39,17 +40,18 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
   }, [isOpen, onClose]);
 
   const navItems = [
-    { id: 'showcase', label: 'Portfolio Showcase', icon: Play },
-    { id: 'about', label: 'About & Approach', icon: User },
-    { id: 'services', label: 'Services', icon: Activity },
-    { id: 'contact', label: 'Inquiries', icon: Mail },
+    { id: 'work', label: 'Selected Work', icon: Play },
+    { id: 'about', label: 'About RKA', icon: User },
+    { id: 'services', label: 'Services', icon: Layers },
+    { id: 'process', label: 'Creative Process', icon: Activity },
+    { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
   return (
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-50 bg-[#0D0E10]/80 backdrop-blur-md transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-50 bg-[#14221B]/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
@@ -62,24 +64,22 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
         role="dialog"
         aria-modal="true"
         aria-label="Navigation Menu"
-        className={`fixed inset-y-0 right-0 z-50 w-full max-w-[320px] bg-[#17191C]/95 backdrop-blur-2xl border-l border-white/10 shadow-2xl transition-transform duration-300 ease-out flex flex-col justify-between p-6 md:hidden ${
+        className={`fixed inset-y-0 right-0 z-50 w-full max-w-[320px] bg-[#F7F6F0] border-l border-[#1E3027]/10 shadow-2xl transition-transform duration-300 ease-out flex flex-col justify-between p-7 md:hidden ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div>
           {/* Header */}
-          <div className="flex items-center justify-between pb-6 border-b border-white/10">
+          <div className="flex items-center justify-between pb-6 border-b border-[#1E3027]/10">
             <div>
-              <h2 className="text-lg font-geist font-semibold tracking-tight text-[#F4F3EF]">
-                Krish Patel
-              </h2>
-              <p className="text-xs font-inter text-[#A5A7AA] mt-0.5">Director & Video Editor</p>
+              <BrandLogo variant="dark" size="sm" className="h-7 w-auto mb-1" />
+              <p className="text-xs font-inter text-[#69736B]">Creative Post-Production Studio</p>
             </div>
             <button
               ref={closeBtnRef}
               onClick={onClose}
               aria-label="Close menu"
-              className="w-9 h-9 rounded-full flex items-center justify-center text-[#A5A7AA] hover:text-[#F4F3EF] bg-white/5 active:scale-95 transition-colors"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-[#69736B] hover:text-[#222A25] bg-[#EDF2E9] active:scale-95 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -97,26 +97,32 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
                     onNavigate(item.id);
                     onClose();
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                  className={`w-full flex items-center justify-between p-3.5 rounded-xl text-left transition-all ${
                     isActive
-                      ? 'bg-white/10 text-[#F4F3EF] border border-white/20 font-medium'
-                      : 'text-[#A5A7AA] hover:bg-white/5 hover:text-[#F4F3EF]'
+                      ? 'bg-[#EDF2E9] text-[#1E3027] font-semibold border border-[#DDE9D7]'
+                      : 'text-[#222A25] hover:bg-[#EDF2E9]/60'
                   }`}
                 >
-                  <Icon className="w-4 h-4 opacity-80" />
-                  <span className="font-geist text-sm">{item.label}</span>
+                  <div className="flex items-center gap-3">
+                    <Icon className="w-4 h-4 text-[#69736B]" />
+                    <span className="font-display text-sm tracking-wide">{item.label}</span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-[#69736B]" />
                 </button>
               );
             })}
           </nav>
         </div>
 
-        {/* Footer Meta */}
-        <div className="pt-6 border-t border-white/10 font-geist text-xs text-[#A5A7AA]">
-          <span className="tracking-wider block uppercase font-medium">RKA EDITZ • ARCHIVE</span>
-          <span className="text-[11px] text-[#A5A7AA]/70 mt-1 block">
-            Ahmedabad • Commercial & Narrative
-          </span>
+        {/* Footer Info inside drawer */}
+        <div className="pt-6 border-t border-[#1E3027]/10">
+          <p className="text-xs font-mono text-[#69736B]">Ahmedabad, IN</p>
+          <a
+            href="mailto:krish@rkaeditz.com"
+            className="text-xs font-display font-medium text-[#1E3027] hover:underline mt-1 block"
+          >
+            krish@rkaeditz.com
+          </a>
         </div>
       </div>
     </>

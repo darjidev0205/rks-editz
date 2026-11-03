@@ -5,6 +5,7 @@ import { Hero } from './components/hero/Hero';
 import { SelectedWork } from './components/works/SelectedWork';
 import { About } from './components/about/About';
 import { Services } from './components/services/Services';
+import { CreativeProcess } from './components/process/CreativeProcess';
 import { Contact } from './components/contact/Contact';
 import { Footer } from './components/footer/Footer';
 import { WhatsAppButton } from './components/ui/WhatsAppButton';
@@ -12,21 +13,24 @@ import { WhatsAppButton } from './components/ui/WhatsAppButton';
 export function App() {
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Active section tracking for navbar
+  // Active section tracking for navbar & cinematic frame timeline
   useEffect(() => {
-    const sectionIds = ['hero', 'showcase', 'about', 'services', 'contact'];
+    const sectionIds = ['hero', 'work', 'about', 'services', 'process', 'contact'];
     
     const handleScroll = () => {
-      const scrollY = window.scrollY + window.innerHeight * 0.3;
-      for (const id of sectionIds) {
+      // Bottom of page check for final contact frame
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80) {
+        setActiveSection('contact');
+        return;
+      }
+
+      const scrollY = window.scrollY + window.innerHeight * 0.35;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
         const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollY >= top && scrollY < top + height) {
-            setActiveSection(id);
-            break;
-          }
+        if (el && scrollY >= el.offsetTop) {
+          setActiveSection(id);
+          break;
         }
       }
     };
@@ -38,32 +42,35 @@ export function App() {
 
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[#0A0B0D] text-[#F4F3EF] selection:bg-[#E8E7E3] selection:text-[#111214] overflow-x-hidden flex flex-col justify-between">
-        {/* Floating Apple-Inspired Glass Navbar */}
+      <div className="relative min-h-screen bg-[#F7F6F0] text-[#222A25] selection:bg-[#1E3027] selection:text-[#F7F6F0] overflow-x-hidden flex flex-col justify-between">
+        {/* Floating Editorial Glass Navbar */}
         <GlassNavbar activeSection={activeSection} />
 
         {/* Main Editorial Flow */}
         <main className="flex-grow">
-          {/* 1. Hero Section (Spacious Intro + Right Upper Visual Cluster) */}
+          {/* Section 01: Hero with Two Continuously Moving Video Rows */}
           <Hero />
 
-          {/* 2. Middle Main Showcase (Staggered Vertical Cards + Horizontal Flow + Layered Photos) */}
+          {/* Section 02 (Main Feature): Pinned Horizontal Portfolio Scroll with 6 Staggered Cards */}
           <SelectedWork />
 
-          {/* 3. About / Approach (Layered Studio Photo + Floating Glass Statement) */}
+          {/* Section 03: About RKA Editz ("There's More to an Edit Than Just Cutting Clips.") */}
           <About />
 
-          {/* 4. Services (Capabilities & Weekly Retainers) */}
+          {/* Section 04: Interactive Services ("What We Bring to the Frame.") */}
           <Services />
 
-          {/* 5. Bottom Section (Two Horizontally Wide Cards + Quick Brief) */}
+          {/* Section 05: Compact Connected Process ("Discover → Shape → Create → Refine") */}
+          <CreativeProcess />
+
+          {/* Section 06: Final Photographic CTA & Two Wide Cards */}
           <Contact />
         </main>
 
-        {/* 6. Footer */}
+        {/* Studio Footer */}
         <Footer />
 
-        {/* Monochromatic Quick-Chat Button */}
+        {/* Official WhatsApp Floating Contact Button */}
         <WhatsAppButton />
       </div>
     </SmoothScrollProvider>

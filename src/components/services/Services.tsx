@@ -1,24 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowForward } from './ArrowIcon';
-import { SERVICES } from '../../data/services';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { SERVICES, ServiceItem } from '../../data/services';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Services: React.FC = () => {
-  const [activeService, setActiveService] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const rowsRef = useRef<HTMLDivElement>(null);
-  const dividerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // 1. Heading masked reveal
       if (headingRef.current) {
         gsap.fromTo(
           headingRef.current.children,
@@ -38,38 +37,18 @@ export const Services: React.FC = () => {
         );
       }
 
-      // 2. Horizontal divider line expansion
-      if (dividerRef.current) {
+      if (listRef.current) {
         gsap.fromTo(
-          dividerRef.current,
-          { scaleX: 0, transformOrigin: 'left center' },
-          {
-            scaleX: 1,
-            duration: 0.9,
-            ease: 'power3.inOut',
-            scrollTrigger: {
-              trigger: dividerRef.current,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // 3. Service rows stagger reveal
-      if (rowsRef.current) {
-        const rows = rowsRef.current.children;
-        gsap.fromTo(
-          rows,
-          { opacity: 0, y: 20 },
+          listRef.current.children,
+          { opacity: 0, y: 25 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.65,
-            stagger: 0.08,
+            duration: 0.7,
+            stagger: 0.1,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: rowsRef.current,
+              trigger: listRef.current,
               start: 'top 85%',
               toggleActions: 'play none none reverse',
             },
@@ -81,83 +60,165 @@ export const Services: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
+  const activeService: ServiceItem = SERVICES[activeServiceIndex];
+
   return (
     <section
       ref={sectionRef}
       id="services"
-      className="relative pt-20 md:pt-28 pb-20 md:pb-28 px-4 sm:px-6 md:px-10 lg:px-12 max-w-[1280px] mx-auto border-t border-white/10"
+      className="relative w-full py-24 sm:py-32 lg:py-36 bg-[#EDF2E9] overflow-hidden scroll-mt-20 border-t border-[#1E3027]/10"
     >
-      {/* Section Header */}
-      <div ref={headingRef} className="mb-10 md:mb-12 max-w-2xl">
-        <span className="font-geist text-xs uppercase tracking-[0.18em] text-[#A5A7AA] font-medium block mb-2">
-          CAPABILITIES & RETAINERS
-        </span>
-        <h2 className="font-geist text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#F4F3EF]">
-          What I Do.
-        </h2>
-        <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5">
-          From the first assembly cut to frame-accurate master deliverables.
-        </p>
-      </div>
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
+        {/* Section Header */}
+        <div ref={headingRef} className="mb-14 lg:mb-20 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DDE9D7] border border-[#C3D4BC] mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1E3027]" />
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#1E3027] font-semibold">
+              CORE CAPABILITIES
+            </span>
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#222A25]">
+            What We Bring to <br className="hidden sm:inline" />
+            <span className="text-[#1E3027]">the Frame.</span>
+          </h2>
+          <p className="font-inter text-sm sm:text-base text-[#69736B] mt-2 leading-relaxed">
+            Five tailored post-production disciplines crafted to deliver maximum narrative clarity,
+            aesthetic weight, and audience retention.
+          </p>
+        </div>
 
-      {/* Hairline Divider */}
-      <div ref={dividerRef} className="w-full h-[1px] bg-white/10 mb-2"></div>
-
-      {/* Service Rows */}
-      <div ref={rowsRef} className="divide-y divide-white/10">
-        {SERVICES.map((service) => {
-          const isExpanded = activeService === service.id;
-          return (
-            <div
-              key={service.id}
-              onClick={() => setActiveService(isExpanded ? null : service.id)}
-              className="py-5 sm:py-7 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02] px-2 sm:px-4 rounded-xl"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-grow max-w-3xl pr-4">
-                  <span className="font-geist text-xs text-[#A5A7AA]/70 block mb-1.5 font-medium">
-                    {service.number}
-                  </span>
-                  <h3 className="font-geist text-lg sm:text-xl md:text-2xl font-medium text-[#F4F3EF] group-hover:text-white transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] mt-1.5 leading-relaxed">
-                    {service.tagline}
-                  </p>
-
-                  {/* Expandable Details on Desktop/Mobile */}
-                  <div
-                    className={`mt-3.5 pt-3.5 border-t border-white/5 transition-all duration-300 overflow-hidden ${
-                      isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <p className="font-inter text-xs sm:text-sm text-[#A5A7AA] leading-relaxed mb-3">
-                      {service.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.deliverables.map((item) => (
-                        <span
-                          key={item}
-                          className="px-2.5 py-1 rounded bg-[#181B20] border border-white/10 text-xs font-geist text-[#F4F3EF]"
+        {/* Interactive Editorial Layout: Interactive List on Left + Live Still Reveal on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Services Interactive List (7 cols on Desktop) */}
+          <div ref={listRef} className="lg:col-span-7 flex flex-col divide-y divide-[#1E3027]/10">
+            {SERVICES.map((service, index) => {
+              const isActive = activeServiceIndex === index;
+              return (
+                <div
+                  key={service.id}
+                  onMouseEnter={() => setActiveServiceIndex(index)}
+                  onClick={() => setActiveServiceIndex(index)}
+                  className={`py-7 transition-all duration-300 cursor-pointer group ${
+                    isActive ? 'pl-2 sm:pl-4' : 'hover:pl-2'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-4 sm:gap-6">
+                      <span className="font-mono text-sm sm:text-base text-[#69736B] group-hover:text-[#1E3027] font-medium pt-1">
+                        {service.number}
+                      </span>
+                      <div>
+                        <h3
+                          className={`font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight transition-colors ${
+                            isActive
+                              ? 'text-[#1E3027]'
+                              : 'text-[#222A25] group-hover:text-[#1E3027]'
+                          }`}
                         >
-                          {item}
-                        </span>
-                      ))}
+                          {service.title}
+                        </h3>
+                        <p className="font-inter text-xs sm:text-sm text-[#69736B] mt-1.5 max-w-lg leading-relaxed">
+                          {service.tagline}
+                        </p>
+
+                        {/* Deliverables tags */}
+                        <div className="flex flex-wrap gap-2 mt-3.5">
+                          {service.deliverables.map((item) => (
+                            <span
+                              key={item}
+                              className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors ${
+                                isActive
+                                  ? 'bg-[#DDE9D7] text-[#1E3027] font-medium'
+                                  : 'bg-white/70 text-[#69736B] group-hover:bg-[#DDE9D7]/60'
+                              }`}
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Mobile-Only Inline Visual (Guarantees visibility without relying on hover) */}
+                        <div className="block lg:hidden mt-4 rounded-xl overflow-hidden aspect-[16/9] border border-[#1E3027]/10 shadow-sm relative">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                          <span className="absolute bottom-2.5 left-2.5 text-[10px] font-mono text-white font-medium">
+                            {service.title}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+                        isActive
+                          ? 'bg-[#1E3027] text-white rotate-45'
+                          : 'bg-white border border-[#1E3027]/10 text-[#69736B] group-hover:bg-[#1E3027] group-hover:text-white'
+                      }`}
+                    >
+                      <ArrowUpRight className="w-4 h-4 transition-transform" />
                     </div>
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <div className="pt-1.5 text-[#A5A7AA] group-hover:text-white transition-colors flex-shrink-0">
-                  <ArrowForward
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      isExpanded ? 'rotate-90 text-white' : 'group-hover:translate-x-1'
-                    }`}
-                  />
+          {/* Desktop Right Side Sticky Live Visual Preview Portal (5 cols) */}
+          <div className="hidden lg:block lg:col-span-5 sticky top-28">
+            <div className="rounded-3xl overflow-hidden bg-white border border-[#1E3027]/12 shadow-2xl p-5 flex flex-col gap-4">
+              {/* Media Still with smooth crossfade */}
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#18191C]">
+                <img
+                  key={activeService.id}
+                  src={activeService.image}
+                  alt={activeService.title}
+                  className="w-full h-full object-cover animate-fade-in transition-all duration-500 scale-100 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono text-[#DDE9D7] uppercase tracking-wider block mb-0.5">
+                      FEATURED DELIVERABLE
+                    </span>
+                    <span className="font-display text-sm font-bold text-white">
+                      {activeService.title}
+                    </span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Service description callout */}
+              <div className="p-3">
+                <span className="font-mono text-xs uppercase tracking-wider text-[#1E3027] font-semibold block mb-1">
+                  DELIVERY SCOPE
+                </span>
+                <p className="font-inter text-xs text-[#69736B] leading-relaxed">
+                  {activeService.description}
+                </p>
+
+                <div className="mt-4 pt-4 border-t border-[#1E3027]/10 flex items-center justify-between">
+                  <span className="font-mono text-xs text-[#69736B]">Standard Turnaround: 2-5 Days</span>
+                  <a
+                    href="#contact"
+                    className="font-display text-xs font-bold text-[#1E3027] hover:underline flex items-center gap-1"
+                  >
+                    <span>Inquire for Project</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </section>
   );
