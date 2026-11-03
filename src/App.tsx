@@ -4,6 +4,7 @@ import { GlassNavbar } from './components/navigation/GlassNavbar';
 import { Hero } from './components/hero/Hero';
 import { SelectedWork } from './components/works/SelectedWork';
 import { BehindTheFeedback } from './components/testimonials/BehindTheFeedback';
+import { AIVideosSection } from './components/aivideos/AIVideosSection';
 import { About } from './components/about/About';
 import { Services } from './components/services/Services';
 import { CreativeProcess } from './components/process/CreativeProcess';
@@ -16,7 +17,7 @@ export function App() {
 
   // Active section tracking for navbar & cinematic frame timeline
   useEffect(() => {
-    const sectionIds = ['hero', 'work', 'testimonials', 'about', 'services', 'process', 'contact'];
+    const sectionIds = ['hero', 'work', 'testimonials', 'ai-videos', 'about', 'services', 'process', 'contact'];
     
     const handleScroll = () => {
       // Bottom of page check for final contact frame
@@ -57,6 +58,9 @@ export function App() {
 
           {/* Section 03: Behind The Feedback — Real 16:9 Client Video Testimonial Experience */}
           <BehindTheFeedback />
+
+          {/* Section 04: AI Videos Spotlight — Dark Cinematic Showcase (CATEGORY 01 / AI VISUALS) */}
+          <AIVideosSection />
 
           {/* Section 03: About RKA Editz ("There's More to an Edit Than Just Cutting Clips.") */}
           <About />

@@ -12,6 +12,7 @@ const SECTIONS = [
   { id: 'hero', name: 'Hero' },
   { id: 'work', name: 'Selected Work' },
   { id: 'testimonials', name: 'Client Story' },
+  { id: 'ai-videos', name: 'AI Videos' },
   { id: 'about', name: 'About' },
   { id: 'services', name: 'Services' },
   { id: 'process', name: 'Process' },
