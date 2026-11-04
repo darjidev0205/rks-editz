@@ -23,7 +23,7 @@ export const AIVideosSection: React.FC = () => {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Scroll-Driven Horizontal Translation with Dynamic Fan-Arch Geometry
+  // Scroll-Driven Horizontal Translation on Desktop + Native Swipe on Mobile
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -90,16 +90,22 @@ export const AIVideosSection: React.FC = () => {
           updateCardArch();
         },
 
-        // MOBILE (< 768px): Light scroll-driven horizontal nudge while preserving touch swipe
+        // MOBILE (< 768px): Native touch-driven horizontal swipe gallery (NO PINNING, NO STUCK STATE)
         '(max-width: 767px)': () => {
           if (!sectionRef.current || !trackRef.current) return;
-          // Apply subtle static fan tilts to give the designed editorial feel
+
+          // Clear any desktop GSAP transforms so native horizontal scroll works without conflict
+          gsap.set(trackRef.current, { clearProps: 'transform' });
+
+          // Apply subtle, restrained tilt for editorial character without clipping outside container
           cardsRef.current.forEach((card, idx) => {
             if (!card) return;
-            const tilt = (idx % 2 === 0 ? -2.5 : 2.5);
+            const tilt = idx % 2 === 0 ? -1.5 : 1.5;
             gsap.set(card, {
               rotation: tilt,
-              transformOrigin: '50% 85%',
+              y: 0,
+              scale: 1,
+              clearProps: 'x,transformOrigin',
             });
           });
         },
@@ -117,7 +123,7 @@ export const AIVideosSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="ai-videos"
-      className="relative w-full min-h-screen bg-[#050814] text-white flex flex-col justify-between py-16 sm:py-20 overflow-hidden scroll-mt-10 selection:bg-[#2DD4BF] selection:text-[#050814]"
+      className="relative w-full min-h-screen bg-[#050814] text-white flex flex-col justify-between pt-28 pb-16 sm:pt-32 sm:pb-20 overflow-hidden scroll-mt-24 sm:scroll-mt-20 selection:bg-[#2DD4BF] selection:text-[#050814]"
     >
       {/* ============================================================
           LAYER 0: DARK CINEMATIC ATMOSPHERE & REPEATED BACKGROUND WORDS
@@ -186,17 +192,23 @@ export const AIVideosSection: React.FC = () => {
       </div>
 
       {/* ============================================================
-          LAYER 2: SCROLL-DRIVEN HORIZONTAL STRIP (THE USER'S SKETCH)
-          Conveyor-style curved fan arrangement moving RIGHT to LEFT
+          LAYER 2: HORIZONTAL VIDEO STRIP
+          Desktop: Scroll-driven curved fan arrangement moving RIGHT to LEFT
+          Mobile: Native touch-driven horizontal swipe gallery with scroll snap
           ============================================================ */}
       <div
         ref={containerRef}
-        className="relative z-10 w-full overflow-hidden py-4 sm:py-6 flex items-center"
+        data-lenis-prevent
+        className="relative z-10 w-full overflow-x-auto md:overflow-hidden py-6 sm:py-8 flex items-center no-scrollbar snap-x snap-mandatory overscroll-x-contain touch-pan-x"
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          scrollPaddingInline: '1.25rem',
+        }}
       >
         {/* Horizontal Moving Track */}
         <div
           ref={trackRef}
-          className="flex items-center gap-6 sm:gap-8 px-6 sm:px-16 md:px-24 will-change-transform flex-nowrap"
+          className="flex items-center gap-5 sm:gap-6 md:gap-8 px-5 sm:px-12 md:px-24 flex-nowrap w-max md:w-auto will-change-transform"
         >
           {AI_VIDEOS_DATA.map((project, idx) => {
             const isPlaying = activeVideoId === project.id;
@@ -208,7 +220,7 @@ export const AIVideosSection: React.FC = () => {
                   cardsRef.current[idx] = el;
                 }}
                 onClick={() => handleTogglePlay(project.id)}
-                className="group relative flex-shrink-0 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[360px] h-[390px] sm:h-[450px] md:h-[500px] rounded-[26px] sm:rounded-[30px] overflow-hidden bg-[#0c1122] border border-white/15 hover:border-[#2DD4BF]/60 transition-colors duration-300 shadow-2xl shadow-black/80 cursor-pointer select-none"
+                className="group relative flex-shrink-0 w-[82vw] max-w-[340px] sm:w-[320px] md:w-[340px] lg:w-[360px] h-[430px] sm:h-[460px] md:h-[500px] rounded-[24px] sm:rounded-[30px] overflow-hidden bg-[#0c1122] border border-white/15 hover:border-[#2DD4BF]/60 transition-colors duration-300 shadow-2xl shadow-black/80 cursor-pointer select-none snap-center"
               >
                 {/* Media Window Container */}
                 <div className="absolute inset-0 overflow-hidden bg-[#070b16]">
@@ -312,7 +324,8 @@ export const AIVideosSection: React.FC = () => {
           ============================================================ */}
       <div className="relative z-10 max-w-[1500px] mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/10">
         <span className="font-mono text-[11px] uppercase tracking-wider text-white/50">
-          SCROLL TO EXPLORE &bull; CLICK ANY CARD TO PLAY
+          <span className="hidden sm:inline">SCROLL TO EXPLORE &bull; CLICK ANY CARD TO PLAY</span>
+          <span className="sm:hidden">SWIPE HORIZONTALLY &bull; TAP CARD TO PLAY</span>
         </span>
 
         <button

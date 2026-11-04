@@ -85,7 +85,7 @@ export const SelectedWork: React.FC = () => {
             });
           }
 
-          // Individual vertical card drift: each card drifts up or down during horizontal travel
+          // Individual vertical card drift on desktop during horizontal travel
           PORTFOLIO_CARDS.forEach((card) => {
             const el = document.getElementById(`card-${card.id}`);
             if (el) {
@@ -102,6 +102,19 @@ export const SelectedWork: React.FC = () => {
             }
           });
         },
+
+        // MOBILE & TABLET (< 1024px): Clear transforms and ensure native horizontal scroll
+        '(max-width: 1023px)': () => {
+          if (trackRef.current) {
+            gsap.set(trackRef.current, { clearProps: 'transform' });
+          }
+          PORTFOLIO_CARDS.forEach((card) => {
+            const el = document.getElementById(`card-${card.id}`);
+            if (el) {
+              gsap.set(el, { clearProps: 'y' });
+            }
+          });
+        },
       });
     }, sectionRef);
 
@@ -112,7 +125,7 @@ export const SelectedWork: React.FC = () => {
     <section
       ref={sectionRef}
       id="work"
-      className="relative w-full min-h-screen overflow-hidden bg-[#EDF2E9] py-16 lg:py-0 flex flex-col justify-center scroll-mt-20"
+      className="relative w-full min-h-screen overflow-hidden bg-[#EDF2E9] pt-28 pb-16 sm:pt-32 sm:pb-20 lg:py-0 flex flex-col justify-center scroll-mt-24 sm:scroll-mt-20"
     >
       {/* LAYER 1: Subtle photographic backdrop behind cards */}
       <div
@@ -133,7 +146,7 @@ export const SelectedWork: React.FC = () => {
       <div className="relative z-10 px-4 sm:px-6 md:px-12 lg:px-16 pt-6 pb-4 lg:pt-10 max-w-[1500px] mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DDE9D7] border border-[#C3D4BC] mb-2.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#DDE9D7] border border-[#C3D4BC] mb-2.5 shadow-xs">
               <Film className="w-3.5 h-3.5 text-[#1E3027]" />
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#1E3027] font-semibold">
                 SELECTED WORK // PORTFOLIO
@@ -143,15 +156,21 @@ export const SelectedWork: React.FC = () => {
               Featured Projects.
             </h2>
             <p className="font-inter text-xs sm:text-sm text-[#69736B] mt-1.5 max-w-lg">
-              Vertical scroll guides the horizontal gallery. Six distinct creative formats with
+              Vertical scroll guides the desktop horizontal gallery. Six distinct creative formats with
               authentic footage and inline preview.
             </p>
           </div>
 
-          <div className="hidden lg:flex items-center gap-6 text-xs font-mono text-[#69736B] pb-2">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-6 text-xs font-mono text-[#69736B] pb-2">
+            {/* Desktop prompt */}
+            <div className="hidden lg:flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#1E3027]" />
               <span>Scroll Vertically to Explore</span>
+            </div>
+            {/* Mobile swipe prompt */}
+            <div className="flex lg:hidden items-center gap-2 text-[#1E3027] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#1E3027] animate-pulse" />
+              <span>Swipe Horizontally to Explore</span>
             </div>
             <div className="flex items-center gap-1.5 text-[#1E3027] font-semibold">
               <span>01 — 06</span>
@@ -161,11 +180,18 @@ export const SelectedWork: React.FC = () => {
         </div>
       </div>
 
-      {/* HORIZONTAL CARDS TRACK */}
-      <div className="relative z-10 w-full overflow-x-auto lg:overflow-visible no-scrollbar py-6 lg:py-10">
+      {/* HORIZONTAL CARDS TRACK: NATIVE SWIPE ON MOBILE, PINNED ON DESKTOP */}
+      <div
+        data-lenis-prevent
+        className="relative z-10 w-full overflow-x-auto lg:overflow-visible no-scrollbar py-6 sm:py-8 lg:py-10 scroll-smooth snap-x snap-mandatory overscroll-x-contain touch-pan-x"
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          scrollPaddingInline: '1.25rem',
+        }}
+      >
         <div
           ref={trackRef}
-          className="flex items-center gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-8 md:px-12 lg:px-16 w-max lg:w-auto"
+          className="flex items-center gap-5 sm:gap-6 lg:gap-10 px-5 sm:px-8 md:px-12 lg:px-16 w-max lg:w-auto"
         >
           {PORTFOLIO_CARDS.map((card) => (
             <PortfolioCardItem
@@ -178,9 +204,9 @@ export const SelectedWork: React.FC = () => {
           ))}
 
           {/* End of Gallery Minimal Anchor Card */}
-          <div className="w-[260px] sm:w-[300px] h-[380px] sm:h-[440px] rounded-2xl bg-white border border-[#1E3027]/10 p-7 flex flex-col justify-between flex-shrink-0 shadow-lg">
+          <div className="snap-center w-[82vw] max-w-[300px] h-[450px] sm:h-[470px] lg:h-[440px] rounded-[22px] bg-white border border-[#1E3027]/10 p-7 flex flex-col justify-between flex-shrink-0 shadow-lg">
             <div>
-              <span className="font-mono text-xs uppercase tracking-wider text-[#69736B] block mb-2">
+              <span className="font-mono text-xs uppercase tracking-wider text-[#69736B] block mb-2 font-semibold">
                 ARCHIVE &amp; COLLABORATION
               </span>
               <h3 className="font-display text-2xl font-bold text-[#222A25] tracking-tight">
@@ -192,7 +218,7 @@ export const SelectedWork: React.FC = () => {
             </div>
             <a
               href="#contact"
-              className="inline-flex items-center justify-between w-full p-3.5 rounded-xl bg-[#1E3027] text-white hover:bg-[#2A4337] transition-all font-display text-xs font-semibold tracking-wider uppercase shadow-xs"
+              className="inline-flex items-center justify-between w-full p-3.5 rounded-xl bg-[#1E3027] text-white hover:bg-[#2A4337] transition-all font-display text-xs font-semibold tracking-wider uppercase shadow-xs active:scale-95"
             >
               <span>Request Private Reel</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -204,7 +230,7 @@ export const SelectedWork: React.FC = () => {
   );
 };
 
-// Sleek, Tall Editorial Card with Exact Initial Offset & Drift
+// Sleek, Tall Editorial Card with Desktop-Only Vertical Rhythm and Mobile Full-Visibility
 interface PortfolioCardItemProps {
   card: PortfolioCardData;
   isPlaying: boolean;
@@ -249,15 +275,10 @@ const PortfolioCardItem: React.FC<PortfolioCardItemProps> = ({
     }
   };
 
-  // Convert initialY to desktop translateY inline style for pixel-accurate vertical rhythm
-  const initialStyle = {
-    transform: `translateY(${card.initialY}px)`,
-  };
-
   return (
     <article
       id={`card-${card.id}`}
-      style={initialStyle}
+      style={{ '--card-init-y': `${card.initialY}px` } as React.CSSProperties}
       onClick={handleTogglePlay}
       tabIndex={0}
       role="button"
@@ -268,7 +289,7 @@ const PortfolioCardItem: React.FC<PortfolioCardItemProps> = ({
           handleTogglePlay(e);
         }
       }}
-      className="group relative w-[280px] sm:w-[310px] lg:w-[335px] h-[420px] sm:h-[460px] lg:h-[480px] rounded-2xl overflow-hidden bg-white border border-[#1E3027]/12 shadow-xl flex flex-col justify-between flex-shrink-0 cursor-pointer transition-all duration-300 hover:border-[#1E3027]/30 hover:shadow-2xl hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-[#1E3027]"
+      className="group relative flex-shrink-0 w-[82vw] max-w-[340px] sm:w-[320px] lg:w-[335px] h-[450px] sm:h-[470px] lg:h-[480px] rounded-[22px] overflow-hidden bg-white border border-[#1E3027]/12 shadow-xl flex flex-col justify-between cursor-pointer transition-all duration-300 hover:border-[#1E3027]/30 hover:shadow-2xl hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-[#1E3027] snap-center [transform:none] lg:[transform:translateY(var(--card-init-y))]"
     >
       {/* Media Window Container */}
       <div className="absolute inset-0 overflow-hidden bg-[#18191C]">
@@ -299,12 +320,12 @@ const PortfolioCardItem: React.FC<PortfolioCardItemProps> = ({
         )}
 
         {/* Gradient Vignette for Text Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40 pointer-events-none" />
       </div>
 
-      {/* Layer: Card Labels, Category & Audio Controls */}
-      <div className="relative z-10 p-5 flex items-center justify-between">
-        <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-mono tracking-wider text-[#1E3027] border border-[#1E3027]/15 uppercase font-bold shadow-xs">
+      {/* Layer: Top Category Label & Audio Controls */}
+      <div className="relative z-10 p-4 sm:p-5 flex items-center justify-between">
+        <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] sm:text-[11px] font-mono tracking-wider text-[#1E3027] border border-[#1E3027]/15 uppercase font-bold shadow-xs">
           {card.category}
         </span>
 
@@ -327,7 +348,7 @@ const PortfolioCardItem: React.FC<PortfolioCardItemProps> = ({
             isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-90 group-hover:opacity-100'
           }`}
         >
-          <div className="w-12 h-12 rounded-full bg-white/95 backdrop-blur-md border border-[#1E3027]/20 flex items-center justify-center text-[#1E3027] group-hover:scale-105 transition-all shadow-xl">
+          <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white/95 backdrop-blur-md border border-[#1E3027]/20 flex items-center justify-center text-[#1E3027] group-hover:scale-105 transition-all shadow-xl">
             {isPlaying ? (
               <Pause className="w-5 h-5 fill-current" />
             ) : (
@@ -337,23 +358,23 @@ const PortfolioCardItem: React.FC<PortfolioCardItemProps> = ({
         </div>
       )}
 
-      {/* Bottom Editorial Content */}
-      <div className="relative z-10 p-5 sm:p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+      {/* Bottom Editorial Content with Guaranteed Vertical Containment */}
+      <div className="relative z-10 p-5 sm:p-6 bg-gradient-to-t from-black/95 via-black/70 to-transparent">
         <div className="flex items-center gap-2 text-[10px] font-mono text-[#DDE9D7] mb-1">
           <span>{card.cardIndex}</span>
           <span>•</span>
           <span>{card.year}</span>
         </div>
-        <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+        <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight leading-snug">
           {card.heading}
         </h3>
         <p className="font-inter text-xs text-[#E8E6DF] mt-1.5 line-clamp-2 leading-relaxed">
           {card.description}
         </p>
 
-        <div className="mt-3.5 pt-3 border-t border-white/15 flex items-center justify-between text-[11px] font-inter text-[#DDE9D7]">
-          <span className="font-medium text-white">{card.client}</span>
-          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/25 transition-all">
+        <div className="mt-3 pt-2.5 border-t border-white/15 flex items-center justify-between text-[11px] font-inter text-[#DDE9D7]">
+          <span className="font-medium text-white truncate max-w-[75%]">{card.client}</span>
+          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/25 transition-all flex-shrink-0">
             <ArrowUpRight className="w-3.5 h-3.5 text-white" />
           </div>
         </div>
